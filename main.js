@@ -157,7 +157,11 @@ document.querySelectorAll('.sachet[data-flavour]').forEach((el) => {
 
 /* ---------- Smooth scroll ---------- */
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const lenis = reduceMotion ? null : new Lenis({ autoRaf: false, lerp: 0.1, smoothWheel: true });
+/* Touch: Lenis leaves native scrolling alone by default (syncTouch: false), so phones don't get the wheel's lerp feel.
+   Set SYNC_TOUCH to true (or open the page with ?touch) to try the smoothed version on a real phone before deciding. */
+const SYNC_TOUCH = false;
+const syncTouch = SYNC_TOUCH || new URLSearchParams(location.search).has('touch');
+const lenis = reduceMotion ? null : new Lenis({ autoRaf: false, lerp: 0.1, smoothWheel: true, syncTouch, syncTouchLerp: 0.085, touchInertiaExponent: 1.7 });
 if (lenis) {
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((t) => lenis.raf(t * 1000));
@@ -208,7 +212,7 @@ function splitAll(root) { root.querySelectorAll('[data-split]').forEach(revealTe
 
 /* ---------- Sections ---------- */
 const SECTIONS = {
-  hero(section) {
+  hero(section, { isMobile }) {
     const q = gsap.utils.selector(section);
     SplitText.create(q('.display')[0], {
       type: 'lines', mask: 'lines', autoSplit: true, linesClass: 'line',
@@ -230,6 +234,12 @@ const SECTIONS = {
     }
 
     const s = q('.hero-sachets .sachet');
+    if (isMobile) {
+      // Phones scroll natively (no Lenis smoothing), so a pinned, scrubbed hero stutters. One light parallax instead.
+      gsap.to(s, { yPercent: -10, ease: 'none', scrollTrigger: { trigger: section, start: 'top top', end: 'bottom top', scrub: true } });
+      gsap.to(q('.scroll-hint'), { autoAlpha: 0, scrollTrigger: { trigger: section, start: 'top -5%', toggleActions: 'play none none reverse' } });
+      return;
+    }
     gsap.timeline({ scrollTrigger: { trigger: section, start: 'top top', end: '+=100%', pin: true, scrub: 1, anticipatePin: 1 } })
       .to(s[0], { xPercent: -30, yPercent: -8, rotation: -9, ease: 'none', duration: 1 }, 0)
       .to(s[2], { xPercent: 30, yPercent: -8, rotation: 9, ease: 'none', duration: 1 }, 0)
@@ -239,18 +249,19 @@ const SECTIONS = {
       .to(q('.scroll-hint'), { autoAlpha: 0, duration: 0.2 }, 0);
   },
 
-  dato(section) {
+  dato(section, { isMobile }) {
     splitAll(section);
     batchReveal(section);
-    // Counter 0 → 30 as the figure enters; the final value is in the markup for no-JS / reduced motion.
+    // Counter 0 → 25 as the figure enters; the final value is in the markup for no-JS / reduced motion.
     section.querySelectorAll('[data-count]').forEach((el) => {
       const target = parseFloat(el.dataset.count);
       const proxy = { v: 0 };
+      let shown = -1;
       el.textContent = '0';
       gsap.to(proxy, {
         v: target, ease: 'none',
         scrollTrigger: { trigger: section, start: 'top 75%', end: 'top 20%', scrub: 1 },
-        onUpdate: () => { el.textContent = Math.round(proxy.v); },
+        onUpdate: () => { const v = Math.round(proxy.v); if (v !== shown) { shown = v; el.textContent = v; } }, // write only when the digit changes: a text change forces layout
       });
     });
     // "Brillo": three rays drawn once, after the number lands.
@@ -259,7 +270,8 @@ const SECTIONS = {
       gsap.set(p, { strokeDasharray: len, strokeDashoffset: len });
       gsap.to(p, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: section, start: 'top 30%', end: 'top 5%', scrub: 1 } });
     });
-    gsap.fromTo(section.querySelector('.stripe'), { xPercent: 12 }, { xPercent: -6, ease: 'none', scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: true } });
+    // The stripe is a rotated block 120% wide: moving it repaints a large area, so it only scrubs on desktop.
+    if (!isMobile) gsap.fromTo(section.querySelector('.stripe'), { xPercent: 12 }, { xPercent: -6, ease: 'none', scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: true } });
   },
 
   // Signature move: pinned for 3 viewports; background, stripe and sachet change flavour with the scroll.
@@ -268,8 +280,10 @@ const SECTIONS = {
     const cur = section.querySelector('.fi-cur');
     const name = section.querySelector('.fi-name');
     if (isMobile) {
+      // Light version of the signature: chapters stacked, each on its base colour; the stick and the copy enter as the chapter arrives.
       chapters.forEach((c, i) => {
-        batchReveal(c);
+        gsap.from(c.querySelector('.sachet--lg'), { y: 60, autoAlpha: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: c, start: 'top 70%', toggleActions: 'play none none reverse' } });
+        gsap.from(c.querySelector('.chapter-copy'), { y: 24, autoAlpha: 0, duration: 0.8, delay: 0.1, scrollTrigger: { trigger: c, start: 'top 70%', toggleActions: 'play none none reverse' } });
         ScrollTrigger.create({ trigger: c, start: 'top 50%', end: 'bottom 50%', onToggle: (self) => { if (self.isActive) { cur.textContent = String(i + 1).padStart(2, '0'); name.textContent = FLAVOURS[c.dataset.flavour].name; } } });
       });
       return;
@@ -304,9 +318,9 @@ const SECTIONS = {
 
   reveal(section) { splitAll(section); batchReveal(section); clipReveal(section); },
   split(section) { splitAll(section); clipReveal(section); },
-  donde(section) {
+  donde(section, { isMobile }) {
     splitAll(section); batchReveal(section); clipReveal(section);
-    gsap.fromTo(section.querySelector(':scope > .stripe'), { xPercent: 10 }, { xPercent: -4, ease: 'none', scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: true } });
+    if (!isMobile) gsap.fromTo(section.querySelector(':scope > .stripe'), { xPercent: 10 }, { xPercent: -4, ease: 'none', scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: true } });
   },
 };
 
