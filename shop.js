@@ -2,21 +2,22 @@
    Prices are reference values for the demo, not real prices. */
 
 const PRODUCTS = {
-  neutral:  { name: 'Neutral',       sub: 'Sabor neutro · Sin cafeína' },
-  citrus:   { name: 'Citrus',        sub: 'Sabor cítrico · Con cafeína' },
-  peach:    { name: 'Peach Mango',   sub: 'Sabor melocotón mango · Sin cafeína' },
-  surtido:  { name: 'Caja surtida',  sub: '8 Neutral · 8 Citrus · 8 Peach Mango' },
+  rojos:    { name: 'Frutos Rojos',  sub: 'Carbo · Frutos rojos' },
+  lima:     { name: 'Lima Limón',    sub: 'Carbo · Lima limón' },
+  neutro:   { name: 'Neutro',        sub: 'Carbo · Neutro' },
+  surtido:  { name: 'Caja surtida',  sub: '8 Frutos Rojos · 8 Lima Limón · 8 Neutro' },
 };
 const FORMATS = {
   unit:  { label: 'Unidad',   units: 1,  price: 2500 },
   pack6: { label: 'Pack x6',  units: 6,  price: 13500 },
   box24: { label: 'Caja x24', units: 24, price: 48000 },
 };
-const STORAGE = 'balandis-cart-demo';
+const STORAGE = 'balandis-cart-demo-v2'; // v2: product keys changed with the Carbo range
 const money = (n) => '$ ' + n.toLocaleString('es-AR');
 
 let cart = [];
 try { cart = JSON.parse(localStorage.getItem(STORAGE) || '[]'); } catch { cart = []; }
+cart = Array.isArray(cart) ? cart.filter((i) => PRODUCTS[i?.product] && FORMATS[i?.format] && i.qty > 0) : [];
 const save = () => { try { localStorage.setItem(STORAGE, JSON.stringify(cart)); } catch { /* private mode: cart lives for the session only */ } };
 
 const pill = document.querySelector('.cart-pill');

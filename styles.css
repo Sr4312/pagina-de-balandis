@@ -5,11 +5,11 @@
   /* Institutional */
   --tinta: #161616;
   --blanco: #ffffff;
-  --niebla: #eeeff0;
-  /* Flavours: intense (stripe + key datum) / medium (flavour block) / base (background) */
-  --neutral-i: #a7c8da; --neutral-m: #c4d6e0; --neutral-b: #dee4e8;
-  --citrus-i:  #edd13c; --citrus-m:  #f0dc6a; --citrus-b:  #efe592;
-  --peach-i:   #ec8a3e; --peach-m:   #f2b784; --peach-b:   #f6cdaa;
+  --niebla: #efece5; /* warm, like the backdrop of the packaging v2 mockups */
+  /* Flavours (packaging v2): intense (stick + stripe) / medium / base (background). Keep these in sync with FLAVOURS in main.js. */
+  --rojos-i:  #c4283f; --rojos-m:  #df7f8d; --rojos-b:  #f2d9dc;
+  --lima-i:   #c5e63c; --lima-m:   #d9ef85; --lima-b:   #eaf4c0;
+  --neutro-i: #ddd7c8; --neutro-m: #e6e1d6; --neutro-b: #f4f2ec;
 
   --bg: var(--blanco);
   --ink: var(--tinta);
@@ -18,6 +18,8 @@
 
   --font-title: "Jost", "Helvetica Neue", Arial, sans-serif;
   --font-body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  --font-cond: "Barlow Condensed", "Arial Narrow", Impact, sans-serif; /* packaging v2: flavour names and figures on the stick */
+  --font-mono: "Space Mono", ui-monospace, "Courier New", monospace;     /* packaging v2: small print on the stick */
 
   --container: 80rem;
   --gutter: clamp(1rem, 4vw, 3rem);
@@ -92,29 +94,33 @@ section { position: relative; padding-block: var(--section); }
 @media (max-width: 480px) { .topbar .brand svg { width: 150px; } }
 
 /* The diagonal stripe — one per piece, rises to the right at 15°, bleeds through the right edge */
-.stripe { position: absolute; right: -8%; width: 120%; height: var(--stripe-h, clamp(140px, 30vh, 280px)); background: var(--stripe, var(--citrus-i)); rotate: -15deg; transform-origin: 100% 50%; pointer-events: none; z-index: 0; }
+.stripe { position: absolute; right: -8%; width: 120%; height: var(--stripe-h, clamp(140px, 30vh, 280px)); background: var(--stripe, var(--lima-i)); rotate: -15deg; transform-origin: 100% 50%; pointer-events: none; z-index: 0; }
 
-/* Sachet (SVG built by main.js from the front architecture) */
-.sachet { aspect-ratio: 300 / 592; width: 100%; }
+/* Sachet: stick with corner tab (SVG built by main.js, 300 × 680). The SVG root sets the ink colour per flavour. */
+.sachet { aspect-ratio: 300 / 680; width: 100%; }
 .sachet svg, .sachet img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 22px 28px rgba(22,22,22,.18)) drop-shadow(0 3px 5px rgba(22,22,22,.10)); }
-.sachet text { font-family: var(--font-body); fill: var(--tinta); }
-.sachet .s-b { font-weight: 700; } .sachet .s-m { font-weight: 500; } .sachet .s-r { font-weight: 400; }
-.sachet .s-icon { color: var(--tinta); }
+.sachet text { font-family: var(--font-body); }
+.sachet .s-cond { font-family: var(--font-cond); }
+.sachet .s-mono { font-family: var(--font-mono); }
+.sachet .s-b, .sachet .s-700 { font-weight: 700; } .sachet .s-800 { font-weight: 800; } .sachet .s-m { font-weight: 500; }
 
 /* ---------- Hero ---------- */
-.hero { min-height: 100svh; background: var(--citrus-b); color: var(--tinta); display: grid; align-items: center; padding-top: calc(var(--header-h) + 2rem); padding-bottom: 3rem; overflow: hidden; --stripe: var(--citrus-i); --stripe-h: clamp(160px, 32vh, 300px); }
+.hero { min-height: 100svh; background: var(--niebla); color: var(--tinta); display: grid; align-items: center; padding-top: calc(var(--header-h) + 2rem); padding-bottom: 3rem; overflow: hidden; --stripe: var(--lima-i); --stripe-h: clamp(160px, 32vh, 300px); }
 .hero .stripe { bottom: 10%; }
 .hero-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center; }
 @media (min-width: 900px) { .hero-grid { grid-template-columns: 6fr 6fr; gap: 3rem; } }
-.hero-sachets { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.5rem, 1.5vw, 1.25rem); align-items: end; max-width: 34rem; margin-inline: auto; }
+/* Three sticks side by side; sized by height so the taller stick format still fits the pinned viewport */
+.hero-sachets { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.5rem, 1.5vw, 1.25rem); align-items: end; max-width: 30rem; margin-inline: auto; }
 .hero-sachets .sachet { will-change: transform; }
+@media (min-width: 900px) { .hero-sachets { grid-template-columns: repeat(3, auto); justify-content: center; max-width: none; } .hero-sachets .sachet { width: auto; height: clamp(16rem, 50vh, 27rem); } }
 .hero .label { color: var(--tinta); }
+.swap { display: inline-block; will-change: transform; }
 .scroll-hint { position: absolute; left: var(--gutter); bottom: 1.25rem; margin: 0; font-size: 0.7rem; color: var(--muted); }
-@media (max-width: 899px) { .hero { padding-bottom: 4rem; } .hero-sachets { max-width: 22rem; } }
+@media (max-width: 899px) { .hero { padding-bottom: 4rem; } .hero-sachets { max-width: 20rem; } }
 
 /* ---------- 01 El dato ---------- */
 /* Copy on the left, the key datum on the right sitting on the stripe that bleeds through the right edge (manual p.18, p.32). */
-.dato { background: var(--blanco); overflow: hidden; --stripe: var(--citrus-i); --stripe-h: clamp(170px, 30vh, 300px); padding-bottom: calc(var(--section) + 4vh); }
+.dato { background: var(--blanco); overflow: hidden; --stripe: var(--lima-i); --stripe-h: clamp(170px, 30vh, 300px); padding-bottom: calc(var(--section) + 4vh); }
 .dato .stripe { bottom: 6%; }
 .dato-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: end; }
 @media (min-width: 900px) { .dato-grid { grid-template-columns: 6fr 6fr; gap: 4rem; } }
@@ -139,27 +145,27 @@ section { position: relative; padding-block: var(--section); }
 
 /* ---------- 02 Sabores (signature) ---------- */
 .flavours { padding: 0; overflow: hidden; color: var(--tinta); --stripe-h: clamp(180px, 36vh, 360px); }
-.flavour-bg { position: absolute; inset: 0; background: var(--neutral-b); z-index: 0; }
-.flavours .stripe { bottom: 14%; background: var(--neutral-i); }
+.flavour-bg { position: absolute; inset: 0; background: var(--rojos-b); z-index: 0; }
+.flavours .stripe { bottom: 14%; background: var(--rojos-i); }
 .flavours-grid { min-height: 100svh; display: grid; grid-template-rows: auto 1fr; padding-top: calc(var(--header-h) + 1.5rem); padding-bottom: 2rem; }
 .flavour-index { display: flex; gap: 0.6rem; align-items: baseline; margin: 0; }
 .flavour-index .fi-name { font-weight: 500; text-transform: none; letter-spacing: 0; font-size: 0.95rem; }
 /* Default (mobile, reduced motion, no JS): stacked chapters, each on its flavour base, no pin.
    The pinned layout only exists when JS confirms motion on a desktop viewport (html.motion). */
-.flavours { background: var(--neutral-b); }
+.flavours { background: var(--rojos-b); }
 .flavours-grid { min-height: 0; display: block; padding-bottom: 0; }
 .flavour-index { margin-bottom: 2rem; }
 .flavours .stripe, .flavour-bg { display: none; }
 .chapters { position: relative; }
 .chapter { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; padding: 3rem var(--gutter) 4rem; margin-inline: calc(-1 * var(--gutter)); }
-.chapter[data-flavour="neutral"] { background: var(--neutral-b); }
-.chapter[data-flavour="citrus"] { background: var(--citrus-b); }
-.chapter[data-flavour="peach"] { background: var(--peach-b); }
+.chapter[data-flavour="rojos"] { background: var(--rojos-b); }
+.chapter[data-flavour="lima"] { background: var(--lima-b); }
+.chapter[data-flavour="neutro"] { background: var(--neutro-b); }
 .chapter-copy .label { margin-bottom: 0.75rem; }
-.chapter .sachet--lg { width: min(62vw, 20rem); margin-inline: auto; }
+.chapter .sachet--lg { width: min(52vw, 16rem); margin-inline: auto; }
 @media (min-width: 900px) {
   .chapter { grid-template-columns: 6fr 6fr; gap: 3rem; padding-block: 4rem 5rem; }
-  .chapter .sachet--lg { width: clamp(14rem, 36vh, 22rem); }
+  .chapter .sachet--lg { width: auto; height: clamp(22rem, 66vh, 36rem); }
   html.motion .flavours-grid { min-height: 100svh; display: grid; padding-bottom: 2rem; }
   html.motion .flavours .stripe, html.motion .flavour-bg { display: block; }
   html.motion .chapters { display: grid; }
@@ -173,9 +179,9 @@ section { position: relative; padding-block: var(--section); }
 .chips { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.75rem; }
 .chip { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.7rem 1.1rem 0.7rem 0.9rem; border-radius: 999px; background: var(--blanco); border: 1px solid var(--line); font-weight: 500; }
 .chip svg { width: 26px; height: 26px; color: var(--tinta); flex: none; }
-.chip--neutral { background: var(--neutral-b); border-color: transparent; }
-.chip--citrus { background: var(--citrus-b); border-color: transparent; }
-.chip--peach { background: var(--peach-b); border-color: transparent; }
+.chip--rojos { background: var(--rojos-b); border-color: transparent; }
+.chip--lima { background: var(--lima-b); border-color: transparent; }
+.chip--neutro { background: var(--neutro-b); border-color: transparent; }
 .quote { border-left: 3px solid var(--tinta); padding-left: 1.25rem; }
 .quote .subtitle { margin-bottom: 0.5rem; }
 
@@ -196,22 +202,24 @@ section { position: relative; padding-block: var(--section); }
 .photo img { width: 100%; height: auto; border-radius: var(--radius); }
 .photo figcaption { margin-top: 0.6rem; }
 
-/* ---------- 05 Con o sin cafeína ---------- */
-.cafeina { background: var(--blanco); padding-bottom: 0; }
-.cafeina .headline { text-align: center; }
+/* ---------- 05 La pausa — the three moments printed on the back of the stick ---------- */
+.pausa { background: var(--blanco); padding-bottom: 0; }
+.pausa .headline { text-align: center; }
+.pausa .body { margin-inline: auto; text-align: center; }
 .split { display: grid; grid-template-columns: 1fr; margin-top: 2.5rem; }
-@media (min-width: 760px) { .split { grid-template-columns: 1fr 1fr; } }
-.half { padding: clamp(2rem, 5vw, 4rem) var(--gutter) clamp(3rem, 6vw, 5rem); }
-.half--con { background: var(--citrus-b); }
-.half--sin { background: var(--niebla); }
-.half-inner { max-width: 28rem; margin-inline: auto; }
-.half svg { width: 44px; height: 44px; color: var(--tinta); margin-bottom: 1rem; }
-.half h3 { font-weight: 700; font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 0.25rem; }
-.half .which { font-family: var(--font-title); font-weight: 400; font-size: 1.5rem; margin: 0 0 1rem; }
-.half p { margin: 0; color: var(--muted); }
+@media (min-width: 760px) { .split { grid-template-columns: 1fr 1fr 1fr; } }
+.momento { padding: clamp(2rem, 5vw, 4rem) var(--gutter) clamp(3rem, 6vw, 5rem); }
+.momento--rojos { background: var(--rojos-b); }
+.momento--lima { background: var(--lima-b); }
+.momento--neutro { background: var(--neutro-b); }
+.momento-inner { max-width: 22rem; margin-inline: auto; }
+.momento svg { width: 44px; height: 44px; color: var(--tinta); margin-bottom: 1rem; }
+.momento h3 { font-weight: 700; font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 0.25rem; }
+.momento .which { font-family: var(--font-title); font-weight: 400; font-size: 1.5rem; margin: 0 0 1rem; }
+.momento p { margin: 0; color: var(--muted); }
 
 /* ---------- 06 Dónde ---------- */
-.donde { overflow: hidden; --stripe: var(--citrus-i); --stripe-h: clamp(140px, 26vh, 240px); }
+.donde { overflow: hidden; --stripe: var(--lima-i); --stripe-h: clamp(140px, 26vh, 240px); }
 .donde .stripe { bottom: -4%; }
 @media (max-width: 899px) { .donde { padding-bottom: calc(var(--section) + 7rem); --stripe-h: 120px; } .donde > .stripe { bottom: 2%; } }
 .donde-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
@@ -222,7 +230,7 @@ section { position: relative; padding-block: var(--section); }
 .banner { position: relative; overflow: hidden; background: var(--tinta); color: var(--blanco); border: 1px solid var(--line); border-radius: 6px; padding: 1.5rem 1.5rem 1.25rem; min-height: 14rem; }
 :root[data-theme="dark"] .banner { border-color: rgba(238,239,240,.25); }
 /* A wedge in the lower-right, as on the race banner (manual p.32): the right end rises ~45% of the banner, the left end sits below it. */
-.banner .stripe { right: -10%; bottom: -56%; width: 70%; height: 100%; background: var(--citrus-i); }
+.banner .stripe { right: -10%; bottom: -56%; width: 70%; height: 100%; background: var(--lima-i); }
 .banner .brand-sm, .banner .big, .banner .sub { position: relative; z-index: 1; }
 .banner .brand-sm { width: 120px; margin-bottom: 1.5rem; }
 .banner .big { font-weight: 700; font-size: clamp(1.4rem, 2.6vw, 2.1rem); text-transform: uppercase; line-height: 1; margin: 0 0 0.3rem; }
@@ -230,25 +238,25 @@ section { position: relative; padding-block: var(--section); }
 .banner .datum { position: absolute; right: 1.5rem; bottom: 0.9rem; z-index: 1; margin: 0; color: var(--tinta); font-weight: 500; font-size: clamp(2rem, 3.4vw, 2.8rem); line-height: 1; letter-spacing: -0.03em; display: flex; align-items: baseline; gap: 0.35rem; }
 .banner .datum small { font-size: 0.32em; font-weight: 700; letter-spacing: 0.05em; }
 .donde .row { margin-top: 2.5rem; }
-.oficial { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem; padding: 0.5rem 0.9rem; border-radius: 4px; background: var(--citrus-i); color: var(--tinta); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.oficial { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem; padding: 0.5rem 0.9rem; border-radius: 4px; background: var(--lima-i); color: var(--tinta); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; }
 
 /* ---------- 06 Tienda (demo marketplace) ---------- */
 .tienda { background: var(--niebla); }
 .tienda-head { display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; }
-.demo-note { display: inline-flex; align-items: center; gap: 0.5rem; margin: 0; padding: 0.5rem 0.9rem; border-radius: 4px; background: var(--citrus-i); color: var(--tinta); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.demo-note { display: inline-flex; align-items: center; gap: 0.5rem; margin: 0; padding: 0.5rem 0.9rem; border-radius: 4px; background: var(--lima-i); color: var(--tinta); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .products { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
 @media (min-width: 640px) { .products { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1100px) { .products { grid-template-columns: repeat(4, 1fr); } }
 .product { background: var(--blanco); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; border: 1px solid var(--line); }
 .product-media { display: grid; place-items: center; padding: 1.5rem 1.5rem 0; min-height: 15rem; }
-.product[data-product="neutral"] .product-media { background: var(--neutral-b); }
-.product[data-product="citrus"] .product-media { background: var(--citrus-b); }
-.product[data-product="peach"] .product-media { background: var(--peach-b); }
+.product[data-product="rojos"] .product-media { background: var(--rojos-b); }
+.product[data-product="lima"] .product-media { background: var(--lima-b); }
+.product[data-product="neutro"] .product-media { background: var(--neutro-b); }
 .product[data-product="surtido"] .product-media { background: var(--niebla); }
-.product-media .sachet { width: 7.5rem; }
+.product-media .sachet { width: 6.4rem; }
 .product-media .sachet svg, .product-media .sachet img { filter: drop-shadow(0 10px 14px rgba(22,22,22,.16)); }
 .trio-mini { display: flex; gap: 0.5rem; align-items: flex-end; }
-.trio-mini .sachet { width: 4.6rem; }
+.trio-mini .sachet { width: 4rem; }
 .product-body { padding: 1.25rem 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
 .product-body h3 { font-family: var(--font-title); font-weight: 400; font-size: 1.5rem; margin: 0; }
 .product-sub { margin: -0.4rem 0 0; color: var(--muted); font-size: 0.9rem; }
@@ -267,7 +275,7 @@ section { position: relative; padding-block: var(--section); }
 .product .add:disabled { opacity: 0.75; cursor: default; }
 
 /* Cart pill + drawer */
-.cart-pill { position: fixed; right: var(--gutter); bottom: 1.25rem; z-index: 45; display: inline-flex; align-items: center; gap: 0.5rem; min-height: 48px; padding: 0.7rem 1.1rem; border: 0; border-radius: 999px; background: var(--citrus-i); color: var(--tinta); font: inherit; font-weight: 700; font-size: 0.9rem; cursor: pointer; box-shadow: 0 12px 28px -12px rgba(22,22,22,.45); }
+.cart-pill { position: fixed; right: var(--gutter); bottom: 1.25rem; z-index: 45; display: inline-flex; align-items: center; gap: 0.5rem; min-height: 48px; padding: 0.7rem 1.1rem; border: 0; border-radius: 999px; background: var(--lima-i); color: var(--tinta); font: inherit; font-weight: 700; font-size: 0.9rem; cursor: pointer; box-shadow: 0 12px 28px -12px rgba(22,22,22,.45); }
 .cart-pill:hover { transform: translateY(-1px); }
 .cart-pill .cart-sep { opacity: 0.6; }
 .cart { position: fixed; top: 0; right: 0; bottom: 0; z-index: 60; width: min(26rem, 100%); background: var(--blanco); color: var(--tinta); box-shadow: -20px 0 50px -30px rgba(22,22,22,.5); display: flex; flex-direction: column; padding: 1.25rem var(--gutter); overflow-y: auto; }
@@ -300,5 +308,5 @@ body.cart-open .cart-pill { display: none; }
 }
 
 /* Cómo usarlo: sachet beside the steps */
-.como-visual { max-width: 20rem; margin-inline: auto; }
+.como-visual { max-width: 16rem; margin-inline: auto; }
 @media (min-width: 900px) { .como-visual { position: sticky; top: calc(var(--header-h) + 2rem); } }

@@ -3,15 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BALANDIS — Energía clara para cada kilómetro</title>
-  <meta name="description" content="BALANDIS Energy Gel: 30 g de carbohidratos en un sachet de 42 g. Tres sabores, con y sin cafeína. Lo que importa, a la vista.">
-  <meta property="og:title" content="BALANDIS — Energía clara">
-  <meta property="og:description" content="Geles energéticos con 30 g de carbohidratos. Tres sabores: Neutral, Citrus y Peach Mango. Con y sin cafeína.">
+  <title>BALANDIS Carbo — Hasta el último minuto</title>
+  <meta name="description" content="BALANDIS Carbo, gel energético: 25 g de carbohidratos, 100 mg de sodio y relación 2:1 malto:fructosa en un stick. Frutos Rojos, Lima Limón y Neutro. Tómalo en la pausa.">
+  <meta property="og:title" content="BALANDIS Carbo — Hasta el último minuto">
+  <meta property="og:description" content="Gel energético con 25 g de carbohidratos y 100 mg de sodio. Tres sabores: Frutos Rojos, Lima Limón y Neutro.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Manual p.16–17: Barlow (400/500/600/700) para informar, Jost (300/400) para titular -->
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <!-- Manual p.16–17: Barlow (400/500/600/700) para informar, Jost (300/400) para titular.
+       Packaging v2: Barlow Condensed (700/800) y Space Mono para la impresión del stick. -->
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600;700&family=Jost:wght@300;400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.26/dist/lenis.css">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -52,6 +53,10 @@
     <symbol id="i-gel" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="10" width="16" height="32" rx="4"/><path d="M20 10V5h8v5M16 21h16"/></g></symbol>
     <symbol id="i-flag" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 44V6h24l-6 8 6 8H12"/><path d="M12 14h24M18 6v16M24 6v16M30 6v16" opacity=".55"/></g></symbol>
     <symbol id="i-route" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 42c-9-9 9-14 5-22"/><path d="M15 20a9 9 0 1 1 18 0c0 7-9 12-9 20"/><circle cx="24" cy="18" r="2"/></g></symbol>
+    <!-- Packaging v2 adds court and field sports: ball (entretiempo), racket (cambio de lado), hoop (tiempo muerto) -->
+    <symbol id="i-ball" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="17"/><path d="M24 13l9 7-3 11H18l-3-11zM24 13V7M33 20l6-3M30 31l4 6M18 31l-4 6M15 20l-6-3"/></g></symbol>
+    <symbol id="i-racket" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="29" cy="18" rx="10" ry="13" transform="rotate(35 29 18)"/><path d="M21 29L8 42M24 10l8 15M19 17l15 8"/></g></symbol>
+    <symbol id="i-hoop" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14h32M12 14v-6h24v6"/><ellipse cx="24" cy="19" rx="11" ry="4"/><path d="M14 21l3 15M34 21l-3 15M17 36h14M19 28h10"/></g></symbol>
   </svg>
 
   <header class="topbar" aria-label="BALANDIS">
@@ -70,22 +75,22 @@
   <main id="top">
 
     <!-- HERO — producto primero. Pinned one viewport: sachets fan out, stripe lifts, copy leaves. -->
-    <section class="hero" data-section="hero" data-title="Energía clara" aria-labelledby="hero-title">
+    <section class="hero" data-section="hero" data-title="Hasta el último" aria-labelledby="hero-title">
       <div class="stripe" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="label">Energy gel · Gel energético</p>
-          <h1 id="hero-title" class="display">Energía clara para cada kilómetro.</h1>
-          <p class="lede">Geles con 30 g de carbohidratos. Tres sabores, con y sin cafeína.</p>
+          <p class="label">Carbo · Gel energético</p>
+          <h1 id="hero-title" class="display">Hasta el último <span class="swap" data-words="minuto|set|km|sprint">minuto</span>.</h1>
+          <p class="lede">Gel energético con 25 g de carbohidratos y 100 mg de sodio. Tres sabores, en stick.</p>
           <div class="row hero-cta">
             <a class="btn btn-primary" href="#sabores">Elegí tu sabor</a>
-            <a class="btn" href="#como">Cómo usarlos</a>
+            <a class="btn" href="#como">Cómo tomarlo</a>
           </div>
         </div>
-        <div class="hero-sachets" role="img" aria-label="Los tres sachets BALANDIS: Neutral, Citrus y Peach Mango">
-          <div class="sachet" data-flavour="neutral"></div>
-          <div class="sachet" data-flavour="citrus"></div>
-          <div class="sachet" data-flavour="peach"></div>
+        <div class="hero-sachets" role="img" aria-label="Los tres sticks BALANDIS Carbo: Frutos Rojos, Lima Limón y Neutro">
+          <div class="sachet" data-flavour="rojos"></div>
+          <div class="sachet" data-flavour="lima"></div>
+          <div class="sachet" data-flavour="neutro"></div>
         </div>
       </div>
       <p class="scroll-hint label muted" aria-hidden="true">Scroll ↓</p>
@@ -95,22 +100,22 @@
     <section class="dato" id="producto" data-section="dato" data-title="El dato" data-theme-section="light" aria-labelledby="dato-title">
       <div class="stripe" aria-hidden="true"></div>
       <div class="container dato-grid">
-        <div class="dato-big" aria-label="30 g de carbohidratos">
-          <span class="big-number"><span data-count="30">30</span><span class="g">g</span></span>
-          <span class="big-unit">CARBS<small>CARBOHIDRATOS</small></span>
+        <div class="dato-big" aria-label="25 g de carbohidratos por gel">
+          <span class="big-number"><span data-count="25">25</span><span class="g">g</span></span>
+          <span class="big-unit">CARBOS<small>POR GEL</small></span>
           <svg class="brillo" viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"><path data-draw d="M30 8 V26"/><path data-draw d="M9 20 L22 30"/><path data-draw d="M51 20 L38 30"/></g></svg>
         </div>
         <div class="dato-copy">
           <p class="label muted">01 — El dato</p>
           <h2 id="dato-title" class="headline" data-split>Lo que importa, a la vista.</h2>
-          <p class="body">30 g de carbohidratos en un sachet de 42 g que entra en cualquier bolsillo. En plena carrera nadie lee letra chica: por eso el envase pone al frente cuánta energía, qué sabor y si tiene cafeína, y deja que el color haga el resto.</p>
+          <p class="body">25 g de carbohidratos, 100 mg de sodio y una relación 2:1 de maltodextrina y fructosa en un stick que entra en cualquier bolsillo. En plena competencia nadie lee letra chica: por eso el frente dice tres números y un sabor, y deja que el color haga el resto.</p>
           <dl class="figures">
-            <div class="figure" data-reveal><dt>Carbohidratos</dt><dd>30 <small>g por sachet</small></dd></div>
-            <div class="figure" data-reveal><dt>Contenido neto</dt><dd>42 <small>g</small></dd></div>
-            <div class="figure" data-reveal><dt>Sabores</dt><dd>3 <small>Neutral · Citrus · Peach Mango</small></dd></div>
-            <div class="figure" data-reveal><dt>Versiones</dt><dd>2 <small>con y sin cafeína</small></dd></div>
+            <div class="figure" data-reveal><dt>Carbohidratos</dt><dd>25 <small>g por gel</small></dd></div>
+            <div class="figure" data-reveal><dt>Sodio</dt><dd>100 <small>mg por gel</small></dd></div>
+            <div class="figure" data-reveal><dt>Malto:fructosa</dt><dd>2:1 <small>relación</small></dd></div>
+            <div class="figure" data-reveal><dt>Sabores</dt><dd>3 <small>Frutos Rojos · Lima Limón · Neutro</small></dd></div>
           </dl>
-          <p class="receipt">Datos de la ficha técnica del producto · Manual de marca BALANDIS v1.0, octubre 2026. Información nutricional completa en el envase.</p>
+          <p class="receipt">Datos del frente y del dorso del envase (packaging v2, octubre 2026). Valor energético 100 kcal por gel. Información nutricional completa y contenido neto en el envase.</p>
         </div>
       </div>
     </section>
@@ -120,32 +125,32 @@
       <div class="flavour-bg" aria-hidden="true"></div>
       <div class="stripe" aria-hidden="true"></div>
       <div class="container flavours-grid">
-        <p class="flavour-index label"><span class="fi-cur">01</span> / 03 · <span class="fi-name">Neutral</span></p>
+        <p class="flavour-index label"><span class="fi-cur">01</span> / 03 · <span class="fi-name">Frutos Rojos</span></p>
         <h2 id="sabores-title" class="visually-hidden">Tres sabores. Una sola idea.</h2>
         <div class="chapters">
-          <article class="chapter" data-flavour="neutral">
+          <article class="chapter" data-flavour="rojos">
             <div class="chapter-copy">
-              <p class="label">Neutral · Sin cafeína</p>
-              <h3 class="headline">Sabor neutro.<br>Sin cafeína.</h3>
-              <p class="body">Para quienes prefieren no sentir el sabor en el kilómetro 30. Mismos 30 g de carbohidratos.</p>
+              <p class="label">Frutos Rojos · Carbo</p>
+              <h3 class="headline">Hasta el último set.</h3>
+              <p class="body">Frutos rojos, el único de los tres impreso en blanco sobre color. Para el cambio de lado y el quinto set. Mismos 25 g de carbohidratos.</p>
             </div>
-            <div class="sachet sachet--lg" data-flavour="neutral"></div>
+            <div class="sachet sachet--lg" data-flavour="rojos"></div>
           </article>
-          <article class="chapter" data-flavour="citrus">
+          <article class="chapter" data-flavour="lima">
             <div class="chapter-copy">
-              <p class="label">Citrus · Con cafeína</p>
-              <h3 class="headline">Sabor cítrico.<br>Con cafeína.</h3>
-              <p class="body">Para quienes suman cafeína a su plan de carrera. El único de los tres que la lleva, y lo dice en el frente.</p>
+              <p class="label">Lima Limón · Carbo</p>
+              <h3 class="headline">Hasta el último minuto.</h3>
+              <p class="body">Lima limón, el que se ve desde el banco. Para el entretiempo y los minutos de descuento. Mismos 25 g de carbohidratos.</p>
             </div>
-            <div class="sachet sachet--lg" data-flavour="citrus"></div>
+            <div class="sachet sachet--lg" data-flavour="lima"></div>
           </article>
-          <article class="chapter" data-flavour="peach">
+          <article class="chapter" data-flavour="neutro">
             <div class="chapter-copy">
-              <p class="label">Peach Mango · Sin cafeína</p>
-              <h3 class="headline">Sabor melocotón mango.<br>Sin cafeína.</h3>
-              <p class="body">Fruta al frente y nada de cafeína. Para los fondos largos en los que el sabor también cuenta.</p>
+              <p class="label">Neutro · Carbo</p>
+              <h3 class="headline">Hasta el último km.</h3>
+              <p class="body">Sin sabor, para quienes a la hora 3 no quieren sentir nada más que agua. Para los fondos largos y la ruta. Mismos 25 g de carbohidratos.</p>
             </div>
-            <div class="sachet sachet--lg" data-flavour="peach"></div>
+            <div class="sachet sachet--lg" data-flavour="neutro"></div>
           </article>
         </div>
       </div>
@@ -156,20 +161,21 @@
       <div class="container cuando-grid">
         <div>
           <p class="label muted">03 — Cuándo</p>
-          <h2 id="cuando-title" class="headline" data-split>¿Fondo largo el domingo? Llevá dos.</h2>
-          <p class="body">BALANDIS está pensado para entrenar y competir: salidas de más de una hora, carreras, días de bici y de montaña. Un sachet entra en cualquier bolsillo; dos también.</p>
+          <h2 id="cuando-title" class="headline" data-split>¿Partido el domingo? Llevá dos.</h2>
+          <p class="body">Carbo está pensado para entrenar y competir en cualquier deporte que dure más de una hora: de la cancha a la ruta. Un stick entra en el bolsillo del short; dos también.</p>
           <ul class="chips" aria-label="Momentos de uso">
-            <li class="chip chip--neutral" data-reveal><svg aria-hidden="true"><use href="#i-run"/></svg>Fondos largos</li>
-            <li class="chip chip--citrus" data-reveal><svg aria-hidden="true"><use href="#i-flag"/></svg>Competencias</li>
-            <li class="chip chip--peach" data-reveal><svg aria-hidden="true"><use href="#i-timer"/></svg>Entrenamientos de más de una hora</li>
-            <li class="chip chip--neutral" data-reveal><svg aria-hidden="true"><use href="#i-bike"/></svg>Salidas en bici</li>
-            <li class="chip chip--citrus" data-reveal><svg aria-hidden="true"><use href="#i-trail"/></svg>Trail y montaña</li>
+            <li class="chip chip--lima" data-reveal><svg aria-hidden="true"><use href="#i-ball"/></svg>Fútbol, rugby y hockey</li>
+            <li class="chip chip--rojos" data-reveal><svg aria-hidden="true"><use href="#i-racket"/></svg>Tenis y pádel</li>
+            <li class="chip chip--neutro" data-reveal><svg aria-hidden="true"><use href="#i-hoop"/></svg>Básquet y vóley</li>
+            <li class="chip chip--lima" data-reveal><svg aria-hidden="true"><use href="#i-run"/></svg>Running y fondos largos</li>
+            <li class="chip chip--rojos" data-reveal><svg aria-hidden="true"><use href="#i-bike"/></svg>Ciclismo</li>
+            <li class="chip chip--neutro" data-reveal><svg aria-hidden="true"><use href="#i-trail"/></svg>Trail y montaña</li>
             <li class="chip" data-reveal><svg aria-hidden="true"><use href="#i-swim"/></svg>Triatlón</li>
           </ul>
         </div>
         <aside class="quote" data-reveal>
-          <p class="subtitle">Encendé tu aura en el kilómetro 30.</p>
-          <p class="body">Corredores, ciclistas y triatletas que entrenan con un objetivo, del primer 10K a la ultra. Gente que valora la información simple y confiable, y que no tiene tiempo de leer letra chica en movimiento.</p>
+          <p class="subtitle">Minuto, set, km o sprint.</p>
+          <p class="body">Jugadores, corredores y ciclistas que entrenan con un objetivo, del primer partido a la ultra. Gente que valora la información simple y confiable, y que no tiene tiempo de leer letra chica en movimiento.</p>
         </aside>
       </div>
     </section>
@@ -181,36 +187,45 @@
           <p class="label muted">04 — Cómo usarlo</p>
           <h2 id="como-title" class="headline" data-split>Tres pasos. Una línea cada uno.</h2>
           <ol class="steps">
-            <li class="step" data-reveal><span class="num">01</span><svg aria-hidden="true"><use href="#i-gel"/></svg><h3>Abrí por la muesca.</h3><p>La muesca está arriba, a la derecha. Se abre con una mano, también con guantes.</p></li>
-            <li class="step" data-reveal><span class="num">02</span><svg aria-hidden="true"><use href="#i-bolt"/></svg><h3>Tomá todo el contenido.</h3><p>Un sachet, una toma: 30 g de carbohidratos. No hace falta dosificar.</p></li>
-            <li class="step" data-reveal><span class="num">03</span><svg aria-hidden="true"><use href="#i-drop"/></svg><h3>Acompañá con agua.</h3><p>Un par de tragos en el puesto de hidratación y seguís.</p></li>
+            <li class="step" data-reveal><span class="num">01</span><svg aria-hidden="true"><use href="#i-gel"/></svg><h3>Abrí por la pestaña.</h3><p>La pestaña está en la esquina de arriba, a la derecha. Se corta con los dedos, también con guantes o vendas.</p></li>
+            <li class="step" data-reveal><span class="num">02</span><svg aria-hidden="true"><use href="#i-bolt"/></svg><h3>Tomá todo el contenido.</h3><p>Un stick, una toma: 25 g de carbohidratos y 100 mg de sodio. No hace falta dosificar.</p></li>
+            <li class="step" data-reveal><span class="num">03</span><svg aria-hidden="true"><use href="#i-drop"/></svg><h3>Acompañá con agua.</h3><p>Un par de tragos de la botella del banco o del puesto de hidratación, y seguís.</p></li>
           </ol>
         </div>
-        <div class="como-visual" data-reveal><div class="sachet sachet--lg" data-flavour="citrus"></div></div>
+        <div class="como-visual" data-reveal><div class="sachet sachet--lg" data-flavour="lima" data-side="back"></div></div>
       </div>
     </section>
 
-    <!-- 05 CON O SIN CAFEÍNA — pieza comparativa, una mitad por opción (manual p.29). -->
-    <section class="cafeina" data-section="split" data-title="Cafeína" data-theme-section="light" aria-labelledby="cafeina-title">
+    <!-- 05 LA PAUSA — los tres momentos del dorso del stick: entretiempo, cambio de lado, tiempo muerto. -->
+    <section class="pausa" data-section="split" data-title="La pausa" data-theme-section="light" aria-labelledby="pausa-title">
       <div class="container">
-        <p class="label muted" style="text-align:center">05 — Elegí</p>
-        <h2 id="cafeina-title" class="headline" data-split>¿Con o sin cafeína?</h2>
+        <p class="label muted" style="text-align:center">05 — Cuándo</p>
+        <h2 id="pausa-title" class="headline" data-split>Tómalo en la pausa.</h2>
+        <p class="body">Un gel en el entretiempo, el cambio de lado o el tiempo muerto. Acompañá con agua. Lo dice el dorso del stick y es toda la instrucción.</p>
       </div>
       <div class="split">
-        <div class="half half--con" data-clip="left">
-          <div class="half-inner">
-            <svg aria-hidden="true"><use href="#i-bean"/></svg>
-            <h3>Con cafeína</h3>
-            <p class="which">Citrus</p>
-            <p>Para quienes suman cafeína a su plan de carrera. La cantidad exacta por sachet figura en la tabla nutricional del envase.</p>
+        <div class="momento momento--lima" data-clip="left">
+          <div class="momento-inner">
+            <svg aria-hidden="true"><use href="#i-ball"/></svg>
+            <h3>Entretiempo</h3>
+            <p class="which">Fútbol · Rugby · Hockey</p>
+            <p>Quince minutos en el vestuario alcanzan para un gel y agua. Entrás al segundo tiempo con 25 g más en el tanque.</p>
           </div>
         </div>
-        <div class="half half--sin" data-clip="right">
-          <div class="half-inner">
-            <svg aria-hidden="true"><use href="#i-bean-off"/></svg>
-            <h3>Sin cafeína</h3>
-            <p class="which">Neutral · Peach Mango</p>
-            <p>Para quienes prefieren evitarla. Mismos 30 g de carbohidratos, mismo sachet de 42 g.</p>
+        <div class="momento momento--rojos" data-clip="up">
+          <div class="momento-inner">
+            <svg aria-hidden="true"><use href="#i-racket"/></svg>
+            <h3>Cambio de lado</h3>
+            <p class="which">Tenis · Pádel</p>
+            <p>Noventa segundos sentado, un stick en el bolso. Para el tercer set y el que venga después.</p>
+          </div>
+        </div>
+        <div class="momento momento--neutro" data-clip="right">
+          <div class="momento-inner">
+            <svg aria-hidden="true"><use href="#i-hoop"/></svg>
+            <h3>Tiempo muerto</h3>
+            <p class="which">Básquet · Vóley</p>
+            <p>Un minuto, un gel, la botella y de vuelta a la cancha. Sin sabor que moleste si elegís Neutro.</p>
           </div>
         </div>
       </div>
@@ -223,18 +238,18 @@
         <div class="tienda-head">
           <div>
             <p class="label muted">06 — Tienda</p>
-            <h2 id="tienda-title" class="headline" data-split>Elegí tu sabor y salí a correr.</h2>
-            <p class="body">Unidad, pack de 6 o caja de 24. Mismos 30 g de carbohidratos en cualquier formato.</p>
+            <h2 id="tienda-title" class="headline" data-split>Elegí tu sabor y salí a jugar.</h2>
+            <p class="body">Unidad, pack de 6 o caja de 24. Mismos 25 g de carbohidratos en cualquier formato.</p>
           </div>
           <p class="demo-note" role="note"><svg width="14" height="14" viewBox="0 0 100 100" aria-hidden="true"><use href="#destello"/></svg>Demo · precios de referencia, no son precios reales</p>
         </div>
         <div class="products">
-          <article class="product" data-product="neutral" data-reveal>
-            <div class="product-media"><div class="sachet" data-flavour="neutral"></div></div>
+          <article class="product" data-product="rojos" data-reveal>
+            <div class="product-media"><div class="sachet" data-flavour="rojos"></div></div>
             <div class="product-body">
-              <h3>Neutral</h3>
-              <p class="product-sub">Sabor neutro · Sin cafeína · 30 g carbs</p>
-              <div class="formats" role="radiogroup" aria-label="Formato"><label class="fmt"><input type="radio" name="fmt-neutral" value="unit" checked><span>Unidad</span></label><label class="fmt"><input type="radio" name="fmt-neutral" value="pack6"><span>Pack x6</span></label><label class="fmt"><input type="radio" name="fmt-neutral" value="box24"><span>Caja x24</span></label></div>
+              <h3>Frutos Rojos</h3>
+              <p class="product-sub">Carbo · 25 g carbos · 100 mg sodio</p>
+              <div class="formats" role="radiogroup" aria-label="Formato"><label class="fmt"><input type="radio" name="fmt-rojos" value="unit" checked><span>Unidad</span></label><label class="fmt"><input type="radio" name="fmt-rojos" value="pack6"><span>Pack x6</span></label><label class="fmt"><input type="radio" name="fmt-rojos" value="box24"><span>Caja x24</span></label></div>
               <div class="product-row">
                 <span class="price" data-price>$ 2.500</span>
                 <div class="qty" aria-label="Cantidad"><button type="button" data-qty="-1" aria-label="Menos">−</button><output>1</output><button type="button" data-qty="1" aria-label="Más">+</button></div>
@@ -242,12 +257,12 @@
               <button class="btn btn-primary add" type="button">Agregar al carrito</button>
             </div>
           </article>
-          <article class="product" data-product="citrus" data-reveal>
-            <div class="product-media"><div class="sachet" data-flavour="citrus"></div></div>
+          <article class="product" data-product="lima" data-reveal>
+            <div class="product-media"><div class="sachet" data-flavour="lima"></div></div>
             <div class="product-body">
-              <h3>Citrus</h3>
-              <p class="product-sub">Sabor cítrico · Con cafeína · 30 g carbs</p>
-              <div class="formats" role="radiogroup" aria-label="Formato"><label class="fmt"><input type="radio" name="fmt-citrus" value="unit" checked><span>Unidad</span></label><label class="fmt"><input type="radio" name="fmt-citrus" value="pack6"><span>Pack x6</span></label><label class="fmt"><input type="radio" name="fmt-citrus" value="box24"><span>Caja x24</span></label></div>
+              <h3>Lima Limón</h3>
+              <p class="product-sub">Carbo · 25 g carbos · 100 mg sodio</p>
+              <div class="formats" role="radiogroup" aria-label="Formato"><label class="fmt"><input type="radio" name="fmt-lima" value="unit" checked><span>Unidad</span></label><label class="fmt"><input type="radio" name="fmt-lima" value="pack6"><span>Pack x6</span></label><label class="fmt"><input type="radio" name="fmt-lima" value="box24"><span>Caja x24</span></label></div>
               <div class="product-row">
                 <span class="price" data-price>$ 2.500</span>
                 <div class="qty" aria-label="Cantidad"><button type="button" data-qty="-1" aria-label="Menos">−</button><output>1</output><button type="button" data-qty="1" aria-label="Más">+</button></div>
@@ -255,12 +270,12 @@
               <button class="btn btn-primary add" type="button">Agregar al carrito</button>
             </div>
           </article>
-          <article class="product" data-product="peach" data-reveal>
-            <div class="product-media"><div class="sachet" data-flavour="peach"></div></div>
+          <article class="product" data-product="neutro" data-reveal>
+            <div class="product-media"><div class="sachet" data-flavour="neutro"></div></div>
             <div class="product-body">
-              <h3>Peach Mango</h3>
-              <p class="product-sub">Sabor melocotón mango · Sin cafeína · 30 g carbs</p>
-              <div class="formats" role="radiogroup" aria-label="Formato"><label class="fmt"><input type="radio" name="fmt-peach" value="unit" checked><span>Unidad</span></label><label class="fmt"><input type="radio" name="fmt-peach" value="pack6"><span>Pack x6</span></label><label class="fmt"><input type="radio" name="fmt-peach" value="box24"><span>Caja x24</span></label></div>
+              <h3>Neutro</h3>
+              <p class="product-sub">Carbo · 25 g carbos · 100 mg sodio</p>
+              <div class="formats" role="radiogroup" aria-label="Formato"><label class="fmt"><input type="radio" name="fmt-neutro" value="unit" checked><span>Unidad</span></label><label class="fmt"><input type="radio" name="fmt-neutro" value="pack6"><span>Pack x6</span></label><label class="fmt"><input type="radio" name="fmt-neutro" value="box24"><span>Caja x24</span></label></div>
               <div class="product-row">
                 <span class="price" data-price>$ 2.500</span>
                 <div class="qty" aria-label="Cantidad"><button type="button" data-qty="-1" aria-label="Menos">−</button><output>1</output><button type="button" data-qty="1" aria-label="Más">+</button></div>
@@ -269,10 +284,10 @@
             </div>
           </article>
           <article class="product" data-product="surtido" data-reveal>
-            <div class="product-media"><div class="trio-mini"><div class="sachet" data-flavour="neutral"></div><div class="sachet" data-flavour="citrus"></div><div class="sachet" data-flavour="peach"></div></div></div>
+            <div class="product-media"><div class="trio-mini"><div class="sachet" data-flavour="rojos"></div><div class="sachet" data-flavour="lima"></div><div class="sachet" data-flavour="neutro"></div></div></div>
             <div class="product-body">
               <h3>Caja surtida</h3>
-              <p class="product-sub">8 Neutral · 8 Citrus · 8 Peach Mango</p>
+              <p class="product-sub">8 Frutos Rojos · 8 Lima Limón · 8 Neutro</p>
               <div class="formats" role="radiogroup" aria-label="Formato"><label class="fmt"><input type="radio" name="fmt-surtido" value="box24" checked><span>Caja x24</span></label></div>
               <div class="product-row">
                 <span class="price" data-price>$ 2.500</span>
@@ -291,12 +306,12 @@
       <div class="container donde-grid">
         <div>
           <p class="label muted">07 — Dónde nos encontrás</p>
-          <h2 id="donde-title" class="headline" data-split>Del primer 10K a la ultra.</h2>
-          <p class="body">BALANDIS se vende donde se entrena y se compite: en la tienda, en la largada y en el grupo de los martes.</p>
+          <h2 id="donde-title" class="headline" data-split>De la cancha a la ruta.</h2>
+          <p class="body">BALANDIS se vende donde se entrena y se compite: en la tienda, en el club, en la largada y en el grupo de los martes.</p>
           <ol class="places">
-            <li data-reveal><span class="n">01</span>Tiendas de running y ciclismo</li>
+            <li data-reveal><span class="n">01</span>Tiendas de deportes, running y ciclismo</li>
             <li data-reveal><span class="n">02</span><a href="#tienda">Tienda online</a></li>
-            <li data-reveal><span class="n">03</span>Carreras y eventos</li>
+            <li data-reveal><span class="n">03</span>Clubes, torneos y carreras</li>
             <li data-reveal><span class="n">04</span>Gimnasios y grupos de entrenamiento</li>
           </ol>
           <div class="row">
@@ -308,11 +323,11 @@
             <div class="stripe" aria-hidden="true"></div>
             <svg class="brand-sm" viewBox="-4 -4 893 108" style="color:#fff" aria-hidden="true"><use href="#logo"/></svg>
             <p class="big">Punto de energía</p>
-            <p class="sub">Km 21 · Gel + agua · Tres sabores</p>
-            <p class="datum">30g <small>CARBS C/U</small></p>
+            <p class="sub">Entretiempo · Km 21 · Gel + agua</p>
+            <p class="datum">25g <small>CARBOS C/U</small></p>
           </div>
           <p class="oficial" data-reveal><svg width="14" height="14" viewBox="0 0 100 100" aria-hidden="true"><use href="#destello"/></svg>Energía oficial</p>
-          <p class="body" data-reveal style="margin-top:1rem">En carreras, BALANDIS firma como energía oficial. En los puestos de hidratación, cada mesa se identifica con el color de su sabor.</p>
+          <p class="body" data-reveal style="margin-top:1rem">En torneos y carreras, BALANDIS firma como energía oficial. En el banco y en los puestos de hidratación, cada mesa se identifica con el color de su sabor.</p>
         </div>
       </div>
     </section>
@@ -321,8 +336,8 @@
     <section class="cierre" data-section="reveal" data-title="Energía clara" data-theme-section="light" aria-labelledby="cierre-title">
       <div class="container">
         <svg class="destello" viewBox="0 0 100 100" aria-hidden="true"><use href="#destello"/></svg>
-        <h2 id="cierre-title" class="display" data-split>Energía clara.</h2>
-        <p class="subtitle" data-reveal>Tres sabores. Una sola idea.</p>
+        <h2 id="cierre-title" class="display" data-split>Hasta el último.</h2>
+        <p class="subtitle" data-reveal>Minuto, set, km o sprint. Tres sabores, una sola idea.</p>
         <p class="row" style="justify-content:center;margin-top:2rem" data-reveal><a class="btn btn-primary" href="#sabores">Elegí tu sabor</a><a class="btn" href="#donde">Dónde comprar</a></p>
       </div>
     </section>
@@ -347,7 +362,7 @@
 
   <footer class="footer container">
     <a class="brand" href="#top" aria-label="BALANDIS"><svg viewBox="-4 -4 893 108" width="150" height="18" aria-hidden="true"><use href="#logo"/></svg></a>
-    <p>Energy gel · Gel energético · Información nutricional completa en el envase.</p>
+    <p>Carbo · Gel energético · Hecho en Argentina · Información nutricional completa en el envase.</p>
     <p>© 2026 BALANDIS</p>
   </footer>
 
