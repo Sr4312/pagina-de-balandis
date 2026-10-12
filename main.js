@@ -14,55 +14,55 @@ const ORDER = ['rojos', 'lima', 'neutro'];
 const STATS = [['25G', 'CARBOHIDRATOS'], ['100MG', 'SODIO'], ['2:1', 'MALTO:FRUCTOSA']];
 
 /* ---------- Sachet: stick format with a corner tab (packaging v2) ----------
-   Geometry in a 300 × 680 box. POUCH is the heat-sealed silhouette (rounded stick + tear tab top right, notch on the right edge);
+   Geometry in a 300 × 1080 box (slim stick, as in the packaging v2 mockups). POUCH is the heat-sealed silhouette (rounded stick + tear tab top right, notch on the right edge);
    TAB is the sealed, hatched corner; BODY is the inflated area inside the seals where sheen, puff and grain live. */
-const POUCH = 'M20 120 A24 24 0 0 1 44 96 H176 L264 14 Q270 8 276 12 L280 16 V36 L274 42 L280 48 V644 A24 24 0 0 1 256 668 H44 A24 24 0 0 1 20 644 Z';
+const POUCH = 'M20 120 A24 24 0 0 1 44 96 H176 L264 14 Q270 8 276 12 L280 16 V36 L274 42 L280 48 V1044 A24 24 0 0 1 256 1068 H44 A24 24 0 0 1 20 1044 Z';
 const TAB = 'M176 96 L264 14 Q270 8 276 12 L280 16 V96 Z';
-const BODY = 'M46 112 H254 A20 20 0 0 1 274 132 V642 A20 20 0 0 1 254 662 H46 A20 20 0 0 1 26 642 V132 A20 20 0 0 1 46 112 Z';
+const BODY = 'M46 112 H254 A20 20 0 0 1 274 132 V1042 A20 20 0 0 1 254 1062 H46 A20 20 0 0 1 26 1042 V132 A20 20 0 0 1 46 112 Z';
 const ink = (f, a) => (f.ink === '#ffffff' ? `rgba(255,255,255,${a})` : `rgba(22,22,22,${a})`);
 
 function sachetFront(f) {
   const n = f.lines.length;
-  const name = f.lines.map((l, i) => `<text x="46" y="${340 - (n - 1 - i) * 58}" font-size="62" letter-spacing="-0.5" class="s-cond s-800">${l}</text>`).join('');
+  const name = f.lines.map((l, i) => `<text x="46" y="${466 - (n - 1 - i) * 66}" font-size="70" letter-spacing="-0.5" class="s-cond s-800">${l}</text>`).join('');
   const rows = STATS.map(([v, l], i) => {
-    const y = 436 + i * 48;
+    const y = 636 + i * 92;
     return `<path d="M46 ${y} H254" stroke="currentColor" stroke-width="1.5"/>
-    <text x="52" y="${y + 33}" font-size="30" class="s-cond s-800">${v}</text>
-    <text x="52" y="${y + 44}" font-size="6.5" letter-spacing="1" class="s-mono">${l}</text>`;
+    <text x="52" y="${y + 48}" font-size="36" class="s-cond s-800">${v}</text>
+    <text x="52" y="${y + 66}" font-size="7" letter-spacing="1" class="s-mono">${l}</text>`;
   }).join('');
   return `${name}
-  <text x="46" y="196" font-size="23" letter-spacing="1.6" class="s-b">CARBO</text>
-  <text x="46" y="372" font-size="19" letter-spacing=".6" class="s-cond s-700">GEL ENERGÉTICO</text>
-  ${rows}<path d="M46 580 H254" stroke="currentColor" stroke-width="1.5"/>
-  <text x="46" y="606" font-size="6.5" letter-spacing="1" class="s-mono">HECHO EN ARGENTINA</text>`;
+  <text x="46" y="212" font-size="24" letter-spacing="1.6" class="s-b">CARBO</text>
+  <text x="46" y="502" font-size="20" letter-spacing=".6" class="s-cond s-700">GEL ENERGÉTICO</text>
+  ${rows}<path d="M46 912 H254" stroke="currentColor" stroke-width="1.5"/>
+  <text x="46" y="966" font-size="7" letter-spacing="1" class="s-mono">HECHO EN ARGENTINA</text>`;
 }
 function sachetBack(f) {
   const row = (y, a, b) => `<text x="52" y="${y}" font-size="6.5" class="s-mono">${a}</text><text x="248" y="${y}" font-size="6.5" text-anchor="end" class="s-mono s-700">${b}</text><path d="M46 ${y + 6} H254" stroke="currentColor" stroke-width=".6"/>`;
   const bars = [3, 1, 2, 1, 3, 1, 1, 2, 1, 3, 2, 1, 1, 2, 3, 1, 2, 1, 1, 3, 1, 2, 2, 1, 3, 1, 1, 2, 1, 2]
     .reduce((acc, w, i, arr) => { const x = acc.x; acc.out += i % 2 ? '' : `<rect x="${x}" y="0" width="${w}" height="30" fill="currentColor"/>`; acc.x = x + w + 1; return acc; }, { x: 0, out: '' }).out;
   return `
-  <text x="46" y="170" font-size="7.5" letter-spacing="1.2" class="s-mono s-700">CARBO · GEL ENERGÉTICO</text>
-  <text x="46" y="206" font-size="24" class="s-cond s-800">HASTA EL ÚLTIMO</text>
-  <text x="46" y="248" font-size="46" class="s-cond s-800">${f.claim}.</text>
-  <text x="46" y="284" font-size="7" letter-spacing="1" class="s-mono s-700">TÓMALO EN LA PAUSA</text>
-  <text x="46" y="298" font-size="7" class="s-mono">1 gel en el entretiempo, el cambio</text>
-  <text x="46" y="309" font-size="7" class="s-mono">de lado o el tiempo muerto.</text>
-  <text x="46" y="320" font-size="7" class="s-mono">Acompañá con agua.</text>
-  <rect x="46" y="340" width="208" height="134" fill="none" stroke="currentColor" stroke-width="1"/>
-  <text x="52" y="354" font-size="6.5" letter-spacing=".6" class="s-mono s-700">INFORMACIÓN NUTRICIONAL</text>
-  <text x="52" y="364" font-size="6.5" class="s-mono">Porción: 1 gel</text>
-  <path d="M46 370 H254" stroke="currentColor" stroke-width="1"/>
-  ${row(382, 'Cant. por porción', '%VD*')}
-  ${row(400, 'Valor energético 100 kcal / 418 kJ', '5%')}
-  ${row(418, 'Carbohidratos 25 g', '8%')}
-  ${row(436, 'Sodio 100 mg', '4%')}
-  <text x="52" y="455" font-size="5.5" class="s-mono">*% Valores diarios con base a una dieta</text>
-  <text x="52" y="463" font-size="5.5" class="s-mono">de 2.000 kcal u 8.400 kJ.</text>
-  <text x="46" y="494" font-size="7" letter-spacing=".6" class="s-mono s-700">INGREDIENTES:</text>
-  <text x="46" y="505" font-size="7" class="s-mono">maltodextrina, fructosa, agua.</text>
-  <text x="46" y="540" font-size="6.5" class="s-mono">Lote / Venc.: ver borde</text>
-  <g transform="translate(176 556)">${bars}</g>
-  <text x="46" y="606" font-size="6.5" letter-spacing="1" class="s-mono">HECHO EN ARGENTINA</text>`;
+  <text x="46" y="196" font-size="8" letter-spacing="1.2" class="s-mono s-700">CARBO · GEL ENERGÉTICO</text>
+  <text x="46" y="250" font-size="28" class="s-cond s-800">HASTA EL ÚLTIMO</text>
+  <text x="46" y="302" font-size="54" class="s-cond s-800">${f.claim}.</text>
+  <text x="46" y="356" font-size="7.5" letter-spacing="1" class="s-mono s-700">TÓMALO EN LA PAUSA</text>
+  <text x="46" y="372" font-size="7.5" class="s-mono">1 gel en el entretiempo, el cambio</text>
+  <text x="46" y="384" font-size="7.5" class="s-mono">de lado o el tiempo muerto.</text>
+  <text x="46" y="396" font-size="7.5" class="s-mono">Acompañá con agua.</text>
+  <rect x="46" y="430" width="208" height="160" fill="none" stroke="currentColor" stroke-width="1"/>
+  <text x="52" y="446" font-size="7" letter-spacing=".6" class="s-mono s-700">INFORMACIÓN NUTRICIONAL</text>
+  <text x="52" y="458" font-size="7" class="s-mono">Porción: 1 gel</text>
+  <path d="M46 466 H254" stroke="currentColor" stroke-width="1"/>
+  ${row(480, 'Cant. por porción', '%VD*')}
+  ${row(502, 'Valor energético 100 kcal / 418 kJ', '5%')}
+  ${row(524, 'Carbohidratos 25 g', '8%')}
+  ${row(546, 'Sodio 100 mg', '4%')}
+  <text x="52" y="568" font-size="6" class="s-mono">*% Valores diarios con base a una dieta</text>
+  <text x="52" y="578" font-size="6" class="s-mono">de 2.000 kcal u 8.400 kJ.</text>
+  <text x="46" y="630" font-size="7.5" letter-spacing=".6" class="s-mono s-700">INGREDIENTES:</text>
+  <text x="46" y="642" font-size="7.5" class="s-mono">maltodextrina, fructosa, agua.</text>
+  <text x="46" y="866" font-size="7" class="s-mono">Lote / Venc.: ver borde</text>
+  <g transform="translate(176 880)">${bars}</g>
+  <text x="46" y="966" font-size="7" letter-spacing="1" class="s-mono">HECHO EN ARGENTINA</text>`;
 }
 function sachetSVG(key, uid, side = 'front') {
   const f = FLAVOURS[key];
@@ -73,7 +73,7 @@ function sachetSVG(key, uid, side = 'front') {
     ? `Dorso del stick BALANDIS Carbo ${f.name}: hasta el último ${f.claim.toLowerCase()}, tómalo en la pausa, información nutricional`
     : `Stick BALANDIS Carbo ${f.name}, gel energético: 25 g de carbohidratos, 100 mg de sodio, relación 2:1 malto:fructosa`;
   return `
-<svg viewBox="0 0 300 680" role="img" aria-label="${label}" style="color:${f.ink}">
+<svg viewBox="0 0 300 1080" role="img" aria-label="${label}" style="color:${f.ink}">
   <defs>
     <clipPath id="${id('clipP')}"><path d="${POUCH}"/></clipPath>
     <clipPath id="${id('clipT')}"><path d="${TAB}"/></clipPath>
@@ -107,11 +107,11 @@ function sachetSVG(key, uid, side = 'front') {
   </defs>
 
   <!-- contact shadow -->
-  <ellipse cx="150" cy="668" rx="112" ry="8" fill="#161616" opacity=".30" filter="url(#${id('soft')})"/>
+  <ellipse cx="150" cy="1068" rx="112" ry="8" fill="#161616" opacity=".30" filter="url(#${id('soft')})"/>
 
   <!-- film: flat printed colour over the whole silhouette, seal band and hatched tab on top -->
   <g clip-path="url(#${id('clipP')})">
-    <rect width="300" height="680" fill="${f.s}"/>
+    <rect width="300" height="1080" fill="${f.s}"/>
     <rect x="0" y="0" width="300" height="112" fill="url(#${id('seal')})"/>
     <g stroke="${ink(f, .10)}" stroke-width="1" fill="none">${crimp}</g>
     <g clip-path="url(#${id('clipT')})" stroke="${ink(f, .16)}" stroke-width="1.2" fill="none">${hatch}</g>
@@ -120,13 +120,13 @@ function sachetSVG(key, uid, side = 'front') {
 
   <!-- inflated body: puff, edge shading, sheen, grain -->
   <g clip-path="url(#${id('clipB')})">
-    <rect width="300" height="680" fill="url(#${id('puff')})"/>
-    <rect width="300" height="680" fill="url(#${id('edge')})"/>
-    <rect width="300" height="680" fill="url(#${id('vert')})"/>
-    <rect width="300" height="680" fill="url(#${id('sheen')})"/>
-    <path d="M262 140 Q252 380 262 640" stroke="rgba(0,0,0,.10)" stroke-width="6" fill="none" filter="url(#${id('soft')})"/>
-    <path d="M38 150 Q32 400 40 620" stroke="rgba(255,255,255,.22)" stroke-width="4" fill="none" filter="url(#${id('soft')})"/>
-    <rect width="300" height="680" filter="url(#${id('grain')})" opacity=".8"/>
+    <rect width="300" height="1080" fill="url(#${id('puff')})"/>
+    <rect width="300" height="1080" fill="url(#${id('edge')})"/>
+    <rect width="300" height="1080" fill="url(#${id('vert')})"/>
+    <rect width="300" height="1080" fill="url(#${id('sheen')})"/>
+    <path d="M262 150 Q252 600 262 1040" stroke="rgba(0,0,0,.10)" stroke-width="6" fill="none" filter="url(#${id('soft')})"/>
+    <path d="M38 160 Q32 620 40 1020" stroke="rgba(255,255,255,.22)" stroke-width="4" fill="none" filter="url(#${id('soft')})"/>
+    <rect width="300" height="1080" filter="url(#${id('grain')})" opacity=".8"/>
   </g>
   <path d="${POUCH}" fill="none" stroke="${ink(f, .22)}" stroke-width="1.2"/>
 
@@ -147,7 +147,7 @@ document.querySelectorAll('.sachet[data-flavour]').forEach((el) => {
   if (!src) { el.innerHTML = sachetSVG(key, id, side); return; }
   const img = new Image();
   img.src = src;
-  img.width = 300; img.height = 680;
+  img.width = 300; img.height = 1080;
   img.decoding = 'async';
   img.alt = `Stick BALANDIS Carbo ${f.name}, gel energético: 25 g de carbohidratos, 100 mg de sodio, relación 2:1 malto:fructosa`;
   img.addEventListener('error', () => { el.innerHTML = sachetSVG(key, id, side); }, { once: true });

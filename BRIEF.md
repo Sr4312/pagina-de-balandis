@@ -23,7 +23,7 @@
 ## Assets
 - Have: el manual (PDF) como fuente de tokens y copy; dos mockups del packaging v2 (frentes y dorsos). Ningún archivo maestro del logo todavía.
 - Draw with CSS/SVG (actual): sticks frente y dorso generados en `main.js` (`sachetSVG(key, uid, side)`) a partir de los mockups: silueta con pestaña de esquina y muesca, banda de sellado crimpada, pestaña rayada, línea de corte punteada, brillo, sombreado de bordes, grano y sombra de contacto. Logo provisorio; íconos en grilla 48 con trazo 3,2.
-- Generated (Kie.ai, 12 Oct 2026, obsoletas): `assets/img/sachet-*.webp`, `trio.webp`, `uso-mano.webp`, `og-trio.jpg` muestran el pouch anterior con el nombre AURA. Desconectadas (`PHOTOS = {}`). Para rehacerlas: renderizar los SVG nuevos como referencia, ajustar los prompts de `assets/ref/jobs*.json` al stick y a Carbo, y correr `tools/cutout.py` (ajustar la relación 300:680).
+- Generated (Kie.ai, 12 Oct 2026, obsoletas): `assets/img/sachet-*.webp`, `trio.webp`, `uso-mano.webp`, `og-trio.jpg` muestran el pouch anterior con el nombre AURA. Desconectadas (`PHOTOS = {}`). Para rehacerlas: renderizar los SVG nuevos como referencia, ajustar los prompts de `assets/ref/jobs*.json` al stick y a Carbo, y correr `tools/cutout.py` (ajustar la relación 300:1080).
 - Pendientes del envase que la web no inventa: contenido neto ([XX] g en el mockup; el frente de la web dice "Hecho en Argentina" en su lugar), azúcares/proteínas/grasas/fibra ([X] en el mockup; la tabla del dorso solo muestra las filas con valor), URL del QR, lote/vencimiento.
 
 ## Never

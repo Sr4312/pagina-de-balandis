@@ -50,7 +50,7 @@ Con `prefers-reduced-motion` todo se muestra sin animación.
 - **Logo**: el wordmark BALANDIS es un redibujo monolínea provisorio. Reemplazar los símbolos `#logo` y `#destello` en `index.html` cuando existan los archivos maestros.
 - **Datos del envase que faltan**: contenido neto (el mockup dice [XX] g; el frente de la web pone "Hecho en Argentina" en su lugar), azúcares, proteínas, grasas y fibra (el dorso solo muestra las filas con valor), URL del QR, lote y vencimiento. La web no los inventa.
 - **Cafeína**: el packaging v2 no la menciona, así que la web tampoco. Si alguna variante la lleva, hay que volver a declararla en el stick y en las secciones.
-- **Fotos**: `assets/img` tiene fotos generadas con Kie.ai del pouch anterior (con el nombre AURA). Están desconectadas (`PHOTOS = {}` en `main.js`). Para rehacerlas con el stick: `KIE_API_KEY` en un `.env` local, renderizar los SVG nuevos como referencia, adaptar los prompts de `assets/ref/jobs*.json` y correr `python tools/cutout.py` ajustando la relación a 300:680.
+- **Fotos**: `assets/img` tiene fotos generadas con Kie.ai del pouch anterior (con el nombre AURA). Están desconectadas (`PHOTOS = {}` en `main.js`). Para rehacerlas con el stick: `KIE_API_KEY` en un `.env` local, renderizar los SVG nuevos como referencia, adaptar los prompts de `assets/ref/jobs*.json` y correr `python tools/cutout.py` ajustando la relación a 300:1080.
 - **Contacto comercial**: no hay dirección de contacto todavía, por eso la sección "Dónde" no tiene botón de contacto.
 
 ## Lo que no va al repo

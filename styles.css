@@ -96,8 +96,8 @@ section { position: relative; padding-block: var(--section); }
 /* The diagonal stripe — one per piece, rises to the right at 15°, bleeds through the right edge */
 .stripe { position: absolute; right: -8%; width: 120%; height: var(--stripe-h, clamp(140px, 30vh, 280px)); background: var(--stripe, var(--lima-i)); rotate: -15deg; transform-origin: 100% 50%; pointer-events: none; z-index: 0; }
 
-/* Sachet: stick with corner tab (SVG built by main.js, 300 × 680). The SVG root sets the ink colour per flavour. */
-.sachet { aspect-ratio: 300 / 680; width: 100%; }
+/* Sachet: stick with corner tab (SVG built by main.js, 300 × 1080). The SVG root sets the ink colour per flavour. */
+.sachet { aspect-ratio: 300 / 1080; width: 100%; }
 .sachet svg, .sachet img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 22px 28px rgba(22,22,22,.18)) drop-shadow(0 3px 5px rgba(22,22,22,.10)); }
 .sachet text { font-family: var(--font-body); }
 .sachet .s-cond { font-family: var(--font-cond); }
@@ -112,11 +112,11 @@ section { position: relative; padding-block: var(--section); }
 /* Three sticks side by side; sized by height so the taller stick format still fits the pinned viewport */
 .hero-sachets { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.5rem, 1.5vw, 1.25rem); align-items: end; max-width: 30rem; margin-inline: auto; }
 .hero-sachets .sachet { will-change: transform; }
-@media (min-width: 900px) { .hero-sachets { grid-template-columns: repeat(3, auto); justify-content: center; max-width: none; } .hero-sachets .sachet { width: auto; height: clamp(16rem, 50vh, 27rem); } }
+@media (min-width: 900px) { .hero-sachets { grid-template-columns: repeat(3, auto); justify-content: center; max-width: none; } .hero-sachets .sachet { width: auto; height: clamp(22rem, 64vh, 36rem); } }
 .hero .label { color: var(--tinta); }
 .swap { display: inline-block; will-change: transform; }
 .scroll-hint { position: absolute; left: var(--gutter); bottom: 1.25rem; margin: 0; font-size: 0.7rem; color: var(--muted); }
-@media (max-width: 899px) { .hero { padding-bottom: 4rem; } .hero-sachets { max-width: 20rem; } }
+@media (max-width: 899px) { .hero { padding-bottom: 4rem; } .hero-sachets { max-width: 17rem; } }
 
 /* ---------- 01 El dato ---------- */
 /* Copy on the left, the key datum on the right sitting on the stripe that bleeds through the right edge (manual p.18, p.32). */
@@ -162,10 +162,10 @@ section { position: relative; padding-block: var(--section); }
 .chapter[data-flavour="lima"] { background: var(--lima-b); }
 .chapter[data-flavour="neutro"] { background: var(--neutro-b); }
 .chapter-copy .label { margin-bottom: 0.75rem; }
-.chapter .sachet--lg { width: min(52vw, 16rem); margin-inline: auto; }
+.chapter .sachet--lg { width: min(34vw, 10rem); margin-inline: auto; }
 @media (min-width: 900px) {
   .chapter { grid-template-columns: 6fr 6fr; gap: 3rem; padding-block: 4rem 5rem; }
-  .chapter .sachet--lg { width: auto; height: clamp(22rem, 66vh, 36rem); }
+  .chapter .sachet--lg { width: auto; height: clamp(24rem, 70vh, 40rem); }
   html.motion .flavours-grid { min-height: 100svh; display: grid; padding-bottom: 2rem; }
   html.motion .flavours .stripe, html.motion .flavour-bg { display: block; }
   html.motion .chapters { display: grid; }
@@ -253,10 +253,10 @@ section { position: relative; padding-block: var(--section); }
 .product[data-product="lima"] .product-media { background: var(--lima-b); }
 .product[data-product="neutro"] .product-media { background: var(--neutro-b); }
 .product[data-product="surtido"] .product-media { background: var(--niebla); }
-.product-media .sachet { width: 6.4rem; }
+.product-media .sachet { width: 4.4rem; }
 .product-media .sachet svg, .product-media .sachet img { filter: drop-shadow(0 10px 14px rgba(22,22,22,.16)); }
 .trio-mini { display: flex; gap: 0.5rem; align-items: flex-end; }
-.trio-mini .sachet { width: 4rem; }
+.trio-mini .sachet { width: 2.8rem; }
 .product-body { padding: 1.25rem 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
 .product-body h3 { font-family: var(--font-title); font-weight: 400; font-size: 1.5rem; margin: 0; }
 .product-sub { margin: -0.4rem 0 0; color: var(--muted); font-size: 0.9rem; }
@@ -308,5 +308,5 @@ body.cart-open .cart-pill { display: none; }
 }
 
 /* Cómo usarlo: sachet beside the steps */
-.como-visual { max-width: 16rem; margin-inline: auto; }
+.como-visual { max-width: 11rem; margin-inline: auto; }
 @media (min-width: 900px) { .como-visual { position: sticky; top: calc(var(--header-h) + 2rem); } }
