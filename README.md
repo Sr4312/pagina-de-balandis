@@ -1,6 +1,6 @@
-# BALANDIS Carbo — sitio
+# CARBO — sitio
 
-Landing scroll-driven para BALANDIS Carbo, gel energético en stick: 25 g de carbohidratos, 100 mg de sodio y relación 2:1 malto:fructosa por gel. Tres sabores: Frutos Rojos, Lima Limón y Neutro. Sitio estático: HTML + CSS + JS, sin build.
+Landing scroll-driven para CARBO, gel energético en stick: 25 g de carbohidratos, 100 mg de sodio y relación 2:1 malto:fructosa por gel. Tres sabores: Frutos Rojos, Lima Limón y Neutro. Sitio estático: HTML + CSS + JS, sin build.
 
 ## Ver el sitio
 
@@ -43,11 +43,11 @@ Con `prefers-reduced-motion` todo se muestra sin animación.
 
 - Los precios ($ 2.500 unidad / $ 13.500 pack x6 / $ 48.000 caja x24) son **de referencia** y la página lo dice. Se cambian en `shop.js`, objeto `FORMATS`.
 - "Finalizar compra" no está conectado. En `shop.js` está marcado el lugar donde enviar el carrito a Mercado Pago, Tiendanube, Shopify u otro checkout.
-- El carrito se guarda en `localStorage` del navegador de cada visitante (clave `balandis-cart-demo-v2`).
+- El carrito se guarda en `localStorage` del navegador de cada visitante (clave `carbo-cart-demo-v2`).
 
 ## Pendientes conocidos
 
-- **Logo**: el wordmark BALANDIS es un redibujo monolínea provisorio. Reemplazar los símbolos `#logo` y `#destello` en `index.html` cuando existan los archivos maestros.
+- **Logo**: el wordmark CARBO es un redibujo monolínea provisorio. Reemplazar los símbolos `#logo` y `#destello` en `index.html` cuando existan los archivos maestros.
 - **Datos del envase que faltan**: contenido neto (el mockup dice [XX] g; el frente de la web pone "Hecho en Argentina" en su lugar), azúcares, proteínas, grasas y fibra (el dorso solo muestra las filas con valor), URL del QR, lote y vencimiento. La web no los inventa.
 - **Cafeína**: el packaging v2 no la menciona, así que la web tampoco. Si alguna variante la lleva, hay que volver a declararla en el stick y en las secciones.
 - **Fotos**: `assets/img` tiene fotos generadas con Kie.ai del pouch anterior (con el nombre AURA). Están desconectadas (`PHOTOS = {}` en `main.js`). Para rehacerlas con el stick: `KIE_API_KEY` en un `.env` local, renderizar los SVG nuevos como referencia, adaptar los prompts de `assets/ref/jobs*.json` y correr `python tools/cutout.py` ajustando la relación a 300:1080.

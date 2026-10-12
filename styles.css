@@ -1,4 +1,4 @@
-/* BALANDIS Energy Gel — tokens from the brand manual v1.0 (Oct 2026).
+/* CARBO (ex BALANDIS, ex AURA) — tokens from the brand manual v1.0 (Oct 2026).
    Content is visible by default; JS only adds motion. */
 
 :root {
@@ -83,7 +83,7 @@ section { position: relative; padding-block: var(--section); }
 .topbar { position: fixed; inset: 0 0 auto 0; z-index: 40; height: var(--header-h); display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-inline: var(--gutter); background: var(--blanco); color: var(--tinta); border-bottom: 1px solid transparent; transition: border-color .3s ease, box-shadow .3s ease; }
 .topbar.is-scrolled { border-bottom-color: rgba(22,22,22,.1); box-shadow: 0 8px 24px -16px rgba(22,22,22,.25); }
 .topbar .brand { display: inline-flex; }
-.topbar .brand svg { width: 210px; height: auto; }
+.topbar .brand svg { width: 180px; height: auto; }
 .topnav { display: none; gap: 1.75rem; list-style: none; margin: 0; padding: 0; }
 .topnav a { text-decoration: none; font-weight: 500; font-size: 0.95rem; }
 .topnav a:hover { text-decoration: underline; text-underline-offset: 4px; }
@@ -91,7 +91,7 @@ section { position: relative; padding-block: var(--section); }
 .topbar .btn { min-height: 40px; padding-block: 0.5rem; }
 /* The header is always white, so its pill stays Tinta even while the page is in the dark section */
 :root[data-theme="dark"] .topbar .btn-primary { background: var(--tinta); color: var(--blanco); }
-@media (max-width: 480px) { .topbar .brand svg { width: 150px; } }
+@media (max-width: 480px) { .topbar .brand svg { width: 130px; } }
 
 /* The diagonal stripe — one per piece, rises to the right at 15°, bleeds through the right edge */
 .stripe { position: absolute; right: -8%; width: 120%; height: var(--stripe-h, clamp(140px, 30vh, 280px)); background: var(--stripe, var(--lima-i)); rotate: -15deg; transform-origin: 100% 50%; pointer-events: none; z-index: 0; }
@@ -298,7 +298,7 @@ body.cart-open .cart-pill { display: none; }
 .cierre .display { font-size: clamp(3rem, 8vw, 8rem); }
 .cierre .subtitle { color: var(--muted); font-weight: 300; margin-top: 1rem; }
 .footer { border-top: 1px solid var(--line); padding-block: 2rem 2.5rem; display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--muted); }
-.footer .brand svg { width: 150px; }
+.footer .brand svg { width: 132px; }
 .footer p { margin: 0; }
 
 /* Reduced motion */

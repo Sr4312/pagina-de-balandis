@@ -1,4 +1,4 @@
-/* BALANDIS — demo shop. Cart lives in localStorage; "Finalizar compra" is a stub to wire to a real checkout.
+/* CARBO — demo shop. Cart lives in localStorage; "Finalizar compra" is a stub to wire to a real checkout.
    Prices are reference values for the demo, not real prices. */
 
 const PRODUCTS = {
@@ -12,7 +12,7 @@ const FORMATS = {
   pack6: { label: 'Pack x6',  units: 6,  price: 13500 },
   box24: { label: 'Caja x24', units: 24, price: 48000 },
 };
-const STORAGE = 'balandis-cart-demo-v2'; // v2: product keys changed with the Carbo range
+const STORAGE = 'carbo-cart-demo-v2'; // v2: product keys changed with the Carbo range
 const money = (n) => '$ ' + n.toLocaleString('es-AR');
 
 let cart = [];

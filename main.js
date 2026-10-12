@@ -1,4 +1,4 @@
-/* BALANDIS Energy Gel — scroll-driven site. GSAP 3.15 + ScrollTrigger + SplitText, Lenis 1.3.
+/* CARBO — scroll-driven site. GSAP 3.15 + ScrollTrigger + SplitText, Lenis 1.3.
    Sections own their triggers; everything is built inside gsap.matchMedia(). */
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -70,8 +70,8 @@ function sachetSVG(key, uid, side = 'front') {
   const hatch = Array.from({ length: 20 }, (_, i) => `<path d="M${170 + i * 6} 0 V100"/>`).join('');
   const crimp = Array.from({ length: 44 }, (_, i) => `<path d="M${22 + i * 6} 96 V112"/>`).join('');
   const label = side === 'back'
-    ? `Dorso del stick BALANDIS Carbo ${f.name}: hasta el último ${f.claim.toLowerCase()}, tómalo en la pausa, información nutricional`
-    : `Stick BALANDIS Carbo ${f.name}, gel energético: 25 g de carbohidratos, 100 mg de sodio, relación 2:1 malto:fructosa`;
+    ? `Dorso del stick CARBO ${f.name}: hasta el último ${f.claim.toLowerCase()}, tómalo en la pausa, información nutricional`
+    : `Stick CARBO ${f.name}, gel energético: 25 g de carbohidratos, 100 mg de sodio, relación 2:1 malto:fructosa`;
   return `
 <svg viewBox="0 0 300 1080" role="img" aria-label="${label}" style="color:${f.ink}">
   <defs>
@@ -149,7 +149,7 @@ document.querySelectorAll('.sachet[data-flavour]').forEach((el) => {
   img.src = src;
   img.width = 300; img.height = 1080;
   img.decoding = 'async';
-  img.alt = `Stick BALANDIS Carbo ${f.name}, gel energético: 25 g de carbohidratos, 100 mg de sodio, relación 2:1 malto:fructosa`;
+  img.alt = `Stick CARBO ${f.name}, gel energético: 25 g de carbohidratos, 100 mg de sodio, relación 2:1 malto:fructosa`;
   img.addEventListener('error', () => { el.innerHTML = sachetSVG(key, id, side); }, { once: true });
   img.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
   el.replaceChildren(img);

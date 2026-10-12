@@ -1,6 +1,6 @@
-# BALANDIS Carbo — brief
+# CARBO — brief
 
-> Renombrado de AURA a BALANDIS el 12 Oct 2026. El sistema visual sigue el manual de marca AURA v1.0; el wordmark BALANDIS es un redibujo monolínea provisorio.
+> Renombrado de AURA a CARBO el 12 Oct 2026. El sistema visual sigue el manual de marca AURA v1.0; el wordmark CARBO es un redibujo monolínea provisorio.
 > **Packaging v2 (12 Oct 2026):** el producto pasa a llamarse **Carbo**, en formato **stick con pestaña de esquina**, tres sabores nuevos (Frutos Rojos · Lima Limón · Neutro) y tres datos al frente: **25 g carbohidratos · 100 mg sodio · 2:1 malto:fructosa**. El dorso lleva el claim "Hasta el último minuto / set / km / sprint" y la instrucción "Tómalo en la pausa". El envase nuevo no menciona cafeína, así que la sección "¿Con o sin cafeína?" se reemplazó por "La pausa". Las fotos generadas (assets/img) muestran el pouch anterior y están desconectadas.
 
 **Belief:** Con Carbo elijo en un segundo y sigo en juego.
@@ -16,9 +16,9 @@
 4. **Cuándo** (patrón 4) — "¿Partido el domingo? Llevá dos." Chips por deporte con íconos nuevos (pelota, raqueta, aro) y los de siempre (running, bici, trail, natación). El público se amplía de resistencia a cancha: fútbol, rugby, hockey, tenis, pádel, básquet, vóley.
 5. **Cómo tomarlo** (patrón 13) — "Abrí por la pestaña." / "Tomá todo el contenido." / "Acompañá con agua."; al lado, el **dorso** del stick Lima Limón (claim, "Tómalo en la pausa", tabla nutricional con las filas conocidas, ingredientes, código de barras).
 6. **La pausa** (estático, tres tercios con clip reveal) — "Tómalo en la pausa.": Entretiempo (fútbol, rugby, hockey) / Cambio de lado (tenis, pádel) / Tiempo muerto (básquet, vóley), cada uno sobre la base de un sabor.
-6b. **Tienda** (demo) — tarjetas por sabor + caja surtida; formato (unidad / pack x6 / caja x24), cantidad, precio; carrito en el navegador (clave `balandis-cart-demo-v2`); "Finalizar compra" es un stub en `shop.js`. Precios de referencia (2.500 / 13.500 / 48.000) marcados como demo.
+6b. **Tienda** (demo) — tarjetas por sabor + caja surtida; formato (unidad / pack x6 / caja x24), cantidad, precio; carrito en el navegador (clave `carbo-cart-demo-v2`); "Finalizar compra" es un stub en `shop.js`. Precios de referencia (2.500 / 13.500 / 48.000) marcados como demo.
 7. **Dónde conseguirlo** (Tinta) — "De la cancha a la ruta.": tiendas de deportes, running y ciclismo; tienda online; clubes, torneos y carreras; gimnasios y grupos. Banner "Punto de energía · Entretiempo · Km 21" con "25g CARBOS C/U". Sin contacto comercial hasta que exista una dirección real.
-8. **Cierre** — destello + "Hasta el último." y "Minuto, set, km o sprint. Tres sabores, una sola idea."; footer: Carbo · Gel energético · Hecho en Argentina.
+8. **Cierre** — destello + "Hasta el último." y "Minuto, set, km o sprint. Tres sabores, una sola idea."; footer: Gel energético · Hecho en Argentina.
 
 ## Assets
 - Have: el manual (PDF) como fuente de tokens y copy; dos mockups del packaging v2 (frentes y dorsos). Ningún archivo maestro del logo todavía.
