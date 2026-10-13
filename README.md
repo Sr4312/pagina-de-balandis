@@ -17,7 +17,7 @@ y abrir <http://localhost:8000>. `index.html` también abre con doble clic, pero
 | `index.html` | Estructura y copy. Al principio están los símbolos SVG del logo, el destello y los íconos. |
 | `styles.css` | Tokens (Tinta, Blanco, Niebla cálida y los tres tonos por sabor), tipografía Jost + Barlow (+ Barlow Condensed y Space Mono para la impresión del stick), la franja diagonal a 15°, cada sección. |
 | `main.js` | Animaciones de scroll (GSAP ScrollTrigger + Lenis) y el generador SVG de los sticks, frente y dorso (`sachetSVG`). |
-| `shop.js` | Tienda demo: tarjetas, carrito persistente en el navegador y el stub de checkout. |
+| `shop.js` | Tienda demo: comparador de formatos, tarjetas, carrito persistente en el navegador, "vuelo" del stick al carrito y el stub de checkout. |
 | `tools/cutout.py` | Recorta a transparencia fotos de producto generadas (ver "Fotos"). |
 | `BRIEF.md` | El brief de diseño: recorrido, creencia, jugada distintiva, curva de energía, assets y decisiones con fecha. |
 
@@ -27,21 +27,27 @@ Los envases se dibujan en SVG desde `main.js` a partir de los mockups del packag
 
 ## Secciones y qué pasa al scrollear
 
-1. **Hero** (pinneado): los tres sticks se abren en abanico, la franja se desplaza, el texto sale. La palabra del claim rota: minuto, set, km, sprint.
-2. **El dato**: el "25g" cuenta de 0 a 25 sobre la franja; aparece el "brillo".
-3. **Sabores** (pinneado 3 pantallas): el fondo pasa de Frutos Rojos a Lima Limón a Neutro, la franja barre y cada stick entra. En mobile, capítulos apilados.
-4. **Cuándo**: deportes de cancha y de ruta como chips con íconos.
-5. **Cómo tomarlo**: los tres pasos, con el dorso del stick al lado.
-6. **La pausa**: entretiempo, cambio de lado y tiempo muerto, tres tercios que se abren.
-7. **Tienda** (demo): ver abajo.
-8. **Dónde**: la única sección en Tinta, con el banner "Punto de energía".
-9. **Cierre**: "Hasta el último."
+0. **Hero** (pinneado): los tres sticks se abren en abanico, la franja se desplaza, el texto sale. La palabra del claim rota: minuto, set, km, sprint. En escritorio, los sticks se inclinan hacia el cursor.
+0b. **Cinta**: los datos del frente del stick en una marquesina continua; se acelera con la velocidad del scroll y se pausa fuera de pantalla.
+1. **El dato**: el "25g" cuenta de 0 a 25 sobre la franja y entra escalando; las cifras chicas (25, 100, 100) también cuentan; aparece el "brillo".
+2. **Sabores** (pinneado 3 pantallas): nada queda quieto. Cada stick recorre su capítulo (sube, se inclina y escala), el texto entra en cascada y sigue subiendo, la franja barre en diagonal y cambia de color, un claim gigante en contorno (SET / MINUTO / KM) cruza por detrás, y el stick activo flota aunque no se scrollee. Tres barritas marcan el progreso y cada capítulo tiene su botón "Comprar". En mobile, capítulos apilados con el stick en parallax.
+3. **Tienda** (demo): comparador de formatos (precio por gel y ahorro, calculados desde `FORMATS`), tarjetas que suben en cascada con el stick aterrizando en cada una, y tres notas sobre la compra. Ver abajo.
+4. **Adentro**: la relación 2:1 como una barra que se llena en dos tiempos (dos partes malto, una fructosa), la tabla del dorso transcripta y la cita "Sin promesas".
+5. **Cuándo**: chips de deportes que entran con rebote, y tres líneas de tiempo (partido 90', set, ruta 42 km) que se dibujan con el scroll; el gel aparece en la pausa.
+6. **Cómo tomarlo**: los tres pasos; el stick se da vuelta (frente a dorso) mientras pasan los pasos, y el paso activo queda a tinta plena.
+7. **La pausa**: entretiempo, cambio de lado y tiempo muerto, tres tercios que se abren, cada uno con su tiempo (15 min, 90 s, 60 s) que cuenta.
+8. **Dónde**: la única sección en Tinta; las reglas de la lista se dibujan y el banner "Punto de energía" tiene su franja con parallax.
+9. **Preguntas**: seis respuestas sacadas del envase, en acordeón animado.
+10. **Cierre**: el destello gira y escala al entrar; "Hasta el último."
 
-Con `prefers-reduced-motion` todo se muestra sin animación.
+Página completa: barra de progreso Lima bajo el header, subrayado del link activo en la navegación, favicon con el destello. Detalles vivos aunque no se scrollee: los sticks del hero y el del flip flotan, el gel de cada línea de tiempo late, el destello del cierre gira muy despacio, la cinta se frena al pasar el mouse. En celular, el comparador de formatos se desliza de costado y la píldora del carrito es compacta.
+
+Con `prefers-reduced-motion` todo se muestra sin animación (el stick de "Cómo tomarlo" muestra frente y dorso apilados).
 
 ## Estado de la tienda (demo)
 
 - Los precios ($ 2.500 unidad / $ 13.500 pack x6 / $ 48.000 caja x24) son **de referencia** y la página lo dice. Se cambian en `shop.js`, objeto `FORMATS`.
+- El comparador de formatos muestra el precio por gel y el ahorro respecto de la unidad; se calculan en `shop.js` a partir de `FORMATS`, así que cambian solos con los precios. Elegir un formato ahí lo aplica a todas las tarjetas.
 - "Finalizar compra" no está conectado. En `shop.js` está marcado el lugar donde enviar el carrito a Mercado Pago, Tiendanube, Shopify u otro checkout.
 - El carrito se guarda en `localStorage` del navegador de cada visitante (clave `carbo-cart-demo-v2`).
 
@@ -50,7 +56,7 @@ Con `prefers-reduced-motion` todo se muestra sin animación.
 - **Logo**: el wordmark CARBO es un redibujo monolínea provisorio. Reemplazar los símbolos `#logo` y `#destello` en `index.html` cuando existan los archivos maestros.
 - **Datos del envase que faltan**: contenido neto (el mockup dice [XX] g; el frente de la web pone "Hecho en Argentina" en su lugar), azúcares, proteínas, grasas y fibra (el dorso solo muestra las filas con valor), URL del QR, lote y vencimiento. La web no los inventa.
 - **Cafeína**: el packaging v2 no la menciona, así que la web tampoco. Si alguna variante la lleva, hay que volver a declararla en el stick y en las secciones.
-- **Fotos**: `assets/img` tiene fotos generadas con Kie.ai del pouch anterior (con el nombre AURA). Están desconectadas (`PHOTOS = {}` en `main.js`). Para rehacerlas con el stick: `KIE_API_KEY` en un `.env` local, renderizar los SVG nuevos como referencia, adaptar los prompts de `assets/ref/jobs*.json` y correr `python tools/cutout.py` ajustando la relación a 300:1080.
+- **Fotos**: el stick se dibuja en SVG (`sachetSVG` en `main.js`) con sellos metálicos crimpados arriba y abajo, pestaña rayada, cuerpo inflado con sombreado de bordes, brillo vertical, arrugas junto a los sellos, borde interno, grano y gloss sobre la impresión. Para reemplazarlo por fotos generadas: las referencias ya están renderizadas en `assets/ref/stick-{rojos,lima,neutro}.png` y los trabajos listos en `assets/ref/jobs-stick.json` (nano-banana-2, calidad) y `jobs-stick-edit.json` (nano-banana-edit, económico). El 13 Oct 2026 la cuenta de Kie.ai se quedó sin créditos: solo salió `gen-stick-neutro.png`, con un error de impresión ("SOBIO", falta "Hecho en Argentina"), así que no se usa. Con créditos: `python <skill>/scripts/kie_generate.py batch assets/ref/jobs-stick.json`, revisar los textos, `python tools/cutout.py` y activar `PHOTOS` en `main.js` (`{ rojos: 'assets/img/stick-rojos.webp', … }`). Las fotos viejas de `assets/img` (`sachet-*.webp`, `trio.webp`, `uso-mano.webp`, `og-trio.jpg`) muestran el pouch anterior con el nombre AURA y siguen desconectadas.
 - **Contacto comercial**: no hay dirección de contacto todavía, por eso la sección "Dónde" no tiene botón de contacto.
 
 ## Lo que no va al repo

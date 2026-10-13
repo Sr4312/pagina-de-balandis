@@ -87,11 +87,21 @@ function sachetSVG(key, uid, side = 'front') {
       <stop offset="0" stop-color="#fff" stop-opacity=".14"/><stop offset=".3" stop-color="#fff" stop-opacity="0"/>
       <stop offset=".86" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".16"/>
     </linearGradient>
-    <linearGradient id="${id('sheen')}" x1="0" y1="0" x2="1" y2="1">
-      <stop offset=".18" stop-color="#fff" stop-opacity="0"/><stop offset=".34" stop-color="#fff" stop-opacity=".26"/>
-      <stop offset=".40" stop-color="#fff" stop-opacity=".05"/><stop offset=".58" stop-color="#fff" stop-opacity="0"/>
-      <stop offset=".76" stop-color="#fff" stop-opacity=".10"/><stop offset=".86" stop-color="#fff" stop-opacity="0"/>
+    <linearGradient id="${id('sheen')}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".22" stop-color="#fff" stop-opacity=".04"/>
+      <stop offset=".36" stop-color="#fff" stop-opacity=".30"/><stop offset=".44" stop-color="#fff" stop-opacity=".10"/>
+      <stop offset=".58" stop-color="#fff" stop-opacity="0"/><stop offset=".80" stop-color="#fff" stop-opacity=".09"/>
+      <stop offset=".9" stop-color="#fff" stop-opacity="0"/>
     </linearGradient>
+    <linearGradient id="${id('gloss')}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset=".30" stop-color="#fff" stop-opacity="0"/><stop offset=".37" stop-color="#fff" stop-opacity=".18"/><stop offset=".43" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="${id('metal')}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".42"/><stop offset=".35" stop-color="#fff" stop-opacity=".08"/>
+      <stop offset=".55" stop-color="#000" stop-opacity=".10"/><stop offset="1" stop-color="#fff" stop-opacity=".18"/>
+    </linearGradient>
+    <filter id="${id('rim')}" x="-10%" y="-5%" width="120%" height="110%"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="${id('wide')}" x="-30%" y="-10%" width="160%" height="120%"><feGaussianBlur stdDeviation="9"/></filter>
     <linearGradient id="${id('seal')}" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#000" stop-opacity=".08"/>
     </linearGradient>
@@ -109,29 +119,46 @@ function sachetSVG(key, uid, side = 'front') {
   <!-- contact shadow -->
   <ellipse cx="150" cy="1068" rx="112" ry="8" fill="#161616" opacity=".30" filter="url(#${id('soft')})"/>
 
-  <!-- film: flat printed colour over the whole silhouette, seal band and hatched tab on top -->
+  <!-- film: flat printed colour over the whole silhouette; metallic crimped seals top and bottom; hatched tear tab -->
   <g clip-path="url(#${id('clipP')})">
     <rect width="300" height="1080" fill="${f.s}"/>
-    <rect x="0" y="0" width="300" height="112" fill="url(#${id('seal')})"/>
-    <g stroke="${ink(f, .10)}" stroke-width="1" fill="none">${crimp}</g>
-    <g clip-path="url(#${id('clipT')})" stroke="${ink(f, .16)}" stroke-width="1.2" fill="none">${hatch}</g>
+    <rect x="0" y="0" width="300" height="112" fill="url(#${id('metal')})"/>
+    <g stroke="${ink(f, .12)}" stroke-width="1" fill="none">${crimp}</g>
+    <g stroke="rgba(255,255,255,.18)" stroke-width="1" fill="none" transform="translate(3 0)">${crimp}</g>
+    <rect x="0" y="1044" width="300" height="24" fill="url(#${id('metal')})" transform="translate(0 0)"/>
+    <g stroke="${ink(f, .12)}" stroke-width="1" fill="none" transform="translate(0 950)">${crimp}</g>
+    <g clip-path="url(#${id('clipT')})" stroke="${ink(f, .18)}" stroke-width="1.2" fill="none">${hatch}</g>
     <path d="M46 104 H168" stroke="${ink(f, .45)}" stroke-width="1" stroke-dasharray="4 4"/>
   </g>
 
-  <!-- inflated body: puff, edge shading, sheen, grain -->
+  <!-- inflated body: puff, edge shading, vertical highlight, wrinkles at the seals, inner rim, grain -->
   <g clip-path="url(#${id('clipB')})">
     <rect width="300" height="1080" fill="url(#${id('puff')})"/>
     <rect width="300" height="1080" fill="url(#${id('edge')})"/>
     <rect width="300" height="1080" fill="url(#${id('vert')})"/>
     <rect width="300" height="1080" fill="url(#${id('sheen')})"/>
-    <path d="M262 150 Q252 600 262 1040" stroke="rgba(0,0,0,.10)" stroke-width="6" fill="none" filter="url(#${id('soft')})"/>
+    <path d="M118 128 Q102 590 120 1046" stroke="rgba(255,255,255,.34)" stroke-width="9" fill="none" filter="url(#${id('wide')})"/>
+    <path d="M262 150 Q252 600 262 1040" stroke="rgba(0,0,0,.12)" stroke-width="7" fill="none" filter="url(#${id('soft')})"/>
     <path d="M38 160 Q32 620 40 1020" stroke="rgba(255,255,255,.22)" stroke-width="4" fill="none" filter="url(#${id('soft')})"/>
+    <!-- wrinkles fanning out from the seals, as the film relaxes into the puffed body -->
+    <g fill="none" stroke-linecap="round" filter="url(#${id('rim')})">
+      <path d="M70 114 q12 36 4 78" stroke="rgba(255,255,255,.16)" stroke-width="2"/>
+      <path d="M120 114 q-6 40 2 70" stroke="rgba(0,0,0,.10)" stroke-width="2"/>
+      <path d="M178 114 q10 34 0 72" stroke="rgba(255,255,255,.13)" stroke-width="2"/>
+      <path d="M226 114 q-8 30 -2 64" stroke="rgba(0,0,0,.09)" stroke-width="2"/>
+      <path d="M84 1044 q6 -34 -2 -62" stroke="rgba(0,0,0,.09)" stroke-width="2"/>
+      <path d="M150 1044 q-8 -30 2 -70" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
+      <path d="M214 1044 q8 -34 -4 -66" stroke="rgba(0,0,0,.10)" stroke-width="2"/>
+    </g>
+    <path d="${BODY}" fill="none" stroke="rgba(0,0,0,.26)" stroke-width="10" filter="url(#${id('rim')})"/>
     <rect width="300" height="1080" filter="url(#${id('grain')})" opacity=".8"/>
   </g>
   <path d="${POUCH}" fill="none" stroke="${ink(f, .22)}" stroke-width="1.2"/>
 
   <!-- print -->
   <g fill="currentColor">${side === 'back' ? sachetBack(f) : sachetFront(f)}</g>
+  <!-- gloss over the print: the highlight also catches the ink -->
+  <rect width="300" height="1080" fill="url(#${id('gloss')})" clip-path="url(#${id('clipB')})"/>
 </svg>`;
 }
 /* Product photos (generated from the SVG references, cut out to alpha, see tools/cutout.py).
@@ -161,7 +188,7 @@ const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
    Set SYNC_TOUCH to true (or open the page with ?touch) to try the smoothed version on a real phone before deciding. */
 const SYNC_TOUCH = false;
 const syncTouch = SYNC_TOUCH || new URLSearchParams(location.search).has('touch');
-const lenis = reduceMotion ? null : new Lenis({ autoRaf: false, lerp: 0.1, smoothWheel: true, syncTouch, syncTouchLerp: 0.085, touchInertiaExponent: 1.7 });
+const lenis = reduceMotion ? null : new Lenis({ autoRaf: false, lerp: 0.09, smoothWheel: true, syncTouch, syncTouchLerp: 0.085, touchInertiaExponent: 1.7 });
 if (lenis) {
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((t) => lenis.raf(t * 1000));
@@ -188,7 +215,7 @@ function revealText(el) {
     type: 'lines,words', mask: 'lines', autoSplit: true, linesClass: 'line',
     onSplit: (self) => gsap.from(self.words, {
       yPercent: 110, opacity: 0, duration: 0.9, ease: 'power3.out', stagger,
-      scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none reverse' },
+      scrollTrigger: { trigger: el, start: 'top 85%', once: true },
     }),
   });
 }
@@ -205,14 +232,29 @@ function clipReveal(root) {
   root.querySelectorAll('[data-clip]').forEach((el) => {
     // Units must match on every side (% throughout) or GSAP can't interpolate and snaps to the end value.
     const from = el.dataset.clip === 'left' ? 'inset(0% 100% 0% 0%)' : el.dataset.clip === 'right' ? 'inset(0% 0% 0% 100%)' : 'inset(100% 0% 0% 0%)';
-    gsap.fromTo(el, { clipPath: from }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.1, ease: 'power3.inOut', scrollTrigger: { trigger: el, start: 'top 82%', toggleActions: 'play none none reverse' } });
+    gsap.fromTo(el, { clipPath: from }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 82%', once: true } });
   });
 }
 function splitAll(root) { root.querySelectorAll('[data-split]').forEach(revealText); }
 
+/* Counter: 0 → data-count while its trigger crosses the viewport. The final value is in the markup for no-JS / reduced motion. */
+function countUp(el, st) {
+  const target = parseFloat(el.dataset.count);
+  const proxy = { v: 0 };
+  let shown = -1;
+  el.textContent = '0';
+  gsap.to(proxy, {
+    v: target, ease: 'none', scrollTrigger: st,
+    onUpdate: () => { const v = Math.round(proxy.v); if (v !== shown) { shown = v; el.textContent = v; } }, // write only when the digit changes: a text change forces layout
+  });
+}
+function counters(root, selector = '[data-count]') {
+  root.querySelectorAll(selector).forEach((el) => countUp(el, { trigger: el, start: 'top 88%', end: 'top 45%', scrub: 1 }));
+}
+
 /* ---------- Sections ---------- */
 const SECTIONS = {
-  hero(section, { isMobile }) {
+  hero(section, { isMobile, isDesktop }) {
     const q = gsap.utils.selector(section);
     SplitText.create(q('.display')[0], {
       type: 'lines', mask: 'lines', autoSplit: true, linesClass: 'line',
@@ -233,10 +275,11 @@ const SECTIONS = {
       ScrollTrigger.create({ trigger: section, start: 'top top', end: 'bottom top', onLeave: () => cycle.pause(), onEnterBack: () => cycle.play() });
     }
 
-    const s = q('.hero-sachets .sachet');
+    const s = [...q('.hero-sachets .sachet')];
+    s.forEach((el, i) => gsap.to(el, { y: -9, duration: 2.8 + i * 0.35, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.4 + i * 0.45 }));
     if (isMobile) {
       // Phones scroll natively (no Lenis smoothing), so a pinned, scrubbed hero stutters. One light parallax instead.
-      gsap.to(s, { yPercent: -10, ease: 'none', scrollTrigger: { trigger: section, start: 'top top', end: 'bottom top', scrub: true } });
+      gsap.to(s, { yPercent: -10, ease: 'none', scrollTrigger: { trigger: section, start: 'top top', end: 'bottom top', scrub: 0.8 } });
       gsap.to(q('.scroll-hint'), { autoAlpha: 0, scrollTrigger: { trigger: section, start: 'top -5%', toggleActions: 'play none none reverse' } });
       return;
     }
@@ -247,23 +290,44 @@ const SECTIONS = {
       .to(q('.stripe'), { yPercent: -45, ease: 'none', duration: 1 }, 0)
       .to(q('.hero-copy'), { yPercent: -16, autoAlpha: 0, ease: 'none', duration: 0.5 }, 0.45)
       .to(q('.scroll-hint'), { autoAlpha: 0, duration: 0.2 }, 0);
+
+    // Pointer parallax: the sticks lean a few pixels toward the cursor (x/y px, separate from the scrubbed xPercent/yPercent).
+    if (isDesktop && matchMedia('(hover: hover)').matches) {
+      const depth = [1.3, 0.8, 1.3];
+      const xs = s.map((el) => gsap.quickTo(el, 'x', { duration: 1, ease: 'power3' }));
+      const ys = s.map((el) => gsap.quickTo(el, 'y', { duration: 1, ease: 'power3' }));
+      const sx = gsap.quickTo(q('.stripe')[0], 'x', { duration: 1.2, ease: 'power3' });
+      section.addEventListener('pointermove', (e) => {
+        const r = section.getBoundingClientRect();
+        const dx = (e.clientX - r.left) / r.width - 0.5, dy = (e.clientY - r.top) / r.height - 0.5;
+        s.forEach((_, i) => { xs[i](dx * 22 * depth[i]); ys[i](dy * 14 * depth[i]); });
+        sx(dx * -30);
+      });
+      section.addEventListener('pointerleave', () => { s.forEach((_, i) => { xs[i](0); ys[i](0); }); sx(0); });
+    }
+  },
+
+  // The stick's front-of-pack data on a loop. Time-based; scroll speed nudges it; paused off-screen.
+  ticker(section) {
+    const track = section.querySelector('.ticker-track');
+    const tween = gsap.to(track, { xPercent: -50, ease: 'none', duration: 30, repeat: -1 });
+    const speed = gsap.quickTo(tween, 'timeScale', { duration: 0.8, ease: 'power2.out' });
+    section.addEventListener('pointerenter', () => speed(0.25));
+    section.addEventListener('pointerleave', () => speed(1));
+    ScrollTrigger.create({
+      trigger: section, start: 'top bottom', end: 'bottom top',
+      onUpdate: (self) => { if (!section.matches(':hover')) speed(1 + Math.min(Math.abs(self.getVelocity()) / 1200, 2.5)); },
+      onEnter: () => tween.play(), onEnterBack: () => tween.play(), onLeave: () => tween.pause(), onLeaveBack: () => tween.pause(),
+    });
   },
 
   dato(section, { isMobile }) {
     splitAll(section);
     batchReveal(section);
-    // Counter 0 → 25 as the figure enters; the final value is in the markup for no-JS / reduced motion.
-    section.querySelectorAll('[data-count]').forEach((el) => {
-      const target = parseFloat(el.dataset.count);
-      const proxy = { v: 0 };
-      let shown = -1;
-      el.textContent = '0';
-      gsap.to(proxy, {
-        v: target, ease: 'none',
-        scrollTrigger: { trigger: section, start: 'top 75%', end: 'top 20%', scrub: 1 },
-        onUpdate: () => { const v = Math.round(proxy.v); if (v !== shown) { shown = v; el.textContent = v; } }, // write only when the digit changes: a text change forces layout
-      });
-    });
+    countUp(section.querySelector('.dato-big [data-count]'), { trigger: section, start: 'top 75%', end: 'top 20%', scrub: 1 });
+    counters(section, '.figures [data-count]');
+    // The big figure settles in as it counts.
+    gsap.from(section.querySelector('.dato-big'), { scale: 0.86, xPercent: 6, transformOrigin: 'right bottom', ease: 'none', scrollTrigger: { trigger: section, start: 'top 80%', end: 'top 20%', scrub: 1 } });
     // "Brillo": three rays drawn once, after the number lands.
     section.querySelectorAll('path[data-draw]').forEach((p) => {
       const len = p.getTotalLength();
@@ -271,56 +335,179 @@ const SECTIONS = {
       gsap.to(p, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: section, start: 'top 30%', end: 'top 5%', scrub: 1 } });
     });
     // The stripe is a rotated block 120% wide: moving it repaints a large area, so it only scrubs on desktop.
-    if (!isMobile) gsap.fromTo(section.querySelector('.stripe'), { xPercent: 12 }, { xPercent: -6, ease: 'none', scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: true } });
+    if (!isMobile) gsap.fromTo(section.querySelector('.stripe'), { xPercent: 12 }, { xPercent: -6, ease: 'none', scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
   },
 
-  // Signature move: pinned for 3 viewports; background, stripe and sachet change flavour with the scroll.
+  // Signature move: pinned for 3 viewports. Nothing holds still: each stick travels through its chapter (rises, tilts, scales),
+  // the copy enters and leaves in a stagger, the stripe sweeps sideways, a giant claim word slides behind, and the active stick floats.
   flavours(section, { isMobile }) {
     const chapters = [...section.querySelectorAll('.chapter')];
     const cur = section.querySelector('.fi-cur');
     const name = section.querySelector('.fi-name');
+    const ghost = section.querySelector('.flavour-ghost');
+    const bars = [...section.querySelectorAll('.fi-bars i')];
+    let shownIndex = -1;
+    const setIndex = (i) => {
+      if (i === shownIndex) return;
+      shownIndex = i;
+      cur.textContent = String(i + 1).padStart(2, '0'); name.textContent = FLAVOURS[ORDER[i]].name;
+      if (ghost) { ghost.textContent = FLAVOURS[ORDER[i]].claim; gsap.fromTo(ghost, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: 'power2.out', overwrite: 'auto' }); }
+    };
+    // Idle float: a slow bob so the stick never looks frozen while the visitor reads (time-based, separate from the scrubbed yPercent).
+    const float = (el, i) => gsap.to(el, { y: -10, duration: 2.6 + i * 0.3, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: i * 0.4 });
     if (isMobile) {
-      // Light version of the signature: chapters stacked, each on its base colour; the stick and the copy enter as the chapter arrives.
+      // Stacked chapters: the stick drifts against the copy as the chapter scrolls, and floats.
       chapters.forEach((c, i) => {
-        gsap.from(c.querySelector('.sachet--lg'), { y: 60, autoAlpha: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: c, start: 'top 70%', toggleActions: 'play none none reverse' } });
-        gsap.from(c.querySelector('.chapter-copy'), { y: 24, autoAlpha: 0, duration: 0.8, delay: 0.1, scrollTrigger: { trigger: c, start: 'top 70%', toggleActions: 'play none none reverse' } });
-        ScrollTrigger.create({ trigger: c, start: 'top 50%', end: 'bottom 50%', onToggle: (self) => { if (self.isActive) { cur.textContent = String(i + 1).padStart(2, '0'); name.textContent = FLAVOURS[c.dataset.flavour].name; } } });
+        const stick = c.querySelector('.sachet--lg');
+        gsap.fromTo(stick, { yPercent: 12, rotation: -6 }, { yPercent: -12, rotation: 4, ease: 'none', scrollTrigger: { trigger: c, start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
+        float(stick, i);
+        gsap.from(c.querySelectorAll('.chapter-copy > *'), { y: 24, autoAlpha: 0, duration: 0.8, stagger: 0.08, scrollTrigger: { trigger: c, start: 'top 72%', once: true } });
+        ScrollTrigger.create({ trigger: c, start: 'top 50%', end: 'bottom 50%', onToggle: (self) => { if (self.isActive) { setIndex(i); bars.forEach((b, j) => b.style.setProperty('--p', j <= i ? 1 : 0)); } } });
       });
       return;
     }
     const bg = section.querySelector('.flavour-bg');
     const stripe = section.querySelector('.stripe');
-    gsap.set(chapters.slice(1), { autoAlpha: 0, yPercent: 10 });
+    const L = 1.2; // scroll "length" of one chapter, in timeline units (3 chapters = 3.6 = 300% of viewport)
+    gsap.set(chapters.slice(1), { autoAlpha: 0 });
     const tl = gsap.timeline({
+      defaults: { ease: 'none' },
       scrollTrigger: {
         trigger: section, start: 'top top', end: '+=300%', pin: true, scrub: 1, anticipatePin: 1,
         onUpdate: (self) => {
-          const i = Math.min(2, Math.floor(self.progress * 3 + 0.15));
-          cur.textContent = String(i + 1).padStart(2, '0');
-          name.textContent = FLAVOURS[ORDER[i]].name;
+          const p = self.progress * 3;
+          setIndex(Math.min(2, Math.floor(p + 0.12)));
+          bars.forEach((b, j) => b.style.setProperty('--p', gsap.utils.clamp(0, 1, p - j)));
         },
       },
     });
-    tl.to({}, { duration: 0.9 }); // hold the first flavour
-    ORDER.slice(1).forEach((key, n) => {
-      const i = n + 1;
-      const f = FLAVOURS[key];
-      tl.addLabel(`c${i}`)
-        .to(chapters[i - 1], { autoAlpha: 0, yPercent: -10, duration: 0.45, ease: 'none' }, `c${i}`)
-        .to(bg, { backgroundColor: f.b, duration: 0.8, ease: 'none' }, `c${i}`)
-        .to(stripe, { backgroundColor: f.i, yPercent: -14 * i, duration: 0.8, ease: 'none' }, `c${i}`) // y only: the stripe must keep bleeding through the right edge
-        .fromTo(chapters[i], { autoAlpha: 0, yPercent: 10 }, { autoAlpha: 1, yPercent: 0, duration: 0.45, ease: 'none' }, `c${i}+=0.35`)
-        .to({}, { duration: 0.9 });
+    // Whole-pin sweeps: the stripe slides sideways and the ghost claim crosses behind everything.
+    tl.fromTo(stripe, { xPercent: 3 }, { xPercent: -5, duration: 3 * L }, 0); // small sweep: the stripe must keep bleeding through the right edge
+    if (ghost) tl.fromTo(ghost, { xPercent: 12, yPercent: -50 }, { xPercent: -28, yPercent: -50, duration: 3 * L }, 0);
+    chapters.forEach((c, i) => {
+      const t0 = i * L;
+      const f = FLAVOURS[ORDER[i]];
+      const stick = c.querySelector('.sachet--lg');
+      const copy = c.querySelectorAll('.chapter-copy > *');
+      // Chapter visibility: in over the first 0.25, out over the last 0.25 (chapter 0 starts visible).
+      if (i > 0) tl.fromTo(c, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.25 }, t0);
+      if (i < 2) tl.to(c, { autoAlpha: 0, duration: 0.25 }, t0 + L - 0.25);
+      // Page colour changes at the boundary.
+      if (i > 0) {
+        tl.to(bg, { backgroundColor: f.b, duration: 0.5 }, t0 - 0.2)
+          .to(stripe, { backgroundColor: f.i, duration: 0.5 }, t0 - 0.2);
+      }
+      // The stick travels through its whole chapter: comes up tilted, passes centre upright, leaves higher and tilted the other way.
+      tl.fromTo(stick, { yPercent: i === 0 ? 0 : 28, rotation: i === 0 ? -4 : -14, scale: i === 0 ? 1 : 0.92 },
+        { yPercent: -26, rotation: 9, scale: 1.06, duration: L }, t0);
+      // The copy rises in a stagger as the chapter opens and keeps drifting up slowly until it leaves.
+      tl.fromTo(copy, { yPercent: i === 0 ? 0 : 40, autoAlpha: i === 0 ? 1 : 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.3, stagger: 0.05 }, t0 + (i === 0 ? 0 : 0.05))
+        .to(copy, { yPercent: -18, duration: L - 0.4, stagger: 0.02 }, t0 + 0.35);
+      float(stick, i);
     });
-    // Each chapter's sachet drifts slightly against the copy while its chapter is on screen.
-    chapters.forEach((c) => gsap.fromTo(c.querySelector('.sachet--lg'), { rotation: -3 }, { rotation: 3, ease: 'none', scrollTrigger: { trigger: section, start: 'top top', end: '+=300%', scrub: 1 } }));
+  },
+
+  // Shop: the cards rise in a stagger and each stick lands in its card. Hover transitions switch on after the entrance (CSS .is-ready).
+  tienda(section) {
+    splitAll(section); batchReveal(section);
+    const cards = [...section.querySelectorAll('.product')];
+    const sticks = cards.map((c) => c.querySelectorAll('.product-media .sachet'));
+    gsap.set(cards, { y: 56, opacity: 0 });
+    sticks.forEach((s) => gsap.set(s, { y: 60, rotation: -8, opacity: 0 }));
+    ScrollTrigger.create({
+      trigger: section.querySelector('.products'), start: 'top 82%', once: true,
+      onEnter: () => {
+        gsap.to(cards, { y: 0, opacity: 1, duration: 0.9, stagger: 0.1, ease: 'power3.out', onComplete: () => cards.forEach((c) => c.classList.add('is-ready')) });
+        sticks.forEach((s, i) => gsap.to(s, { y: 0, rotation: 0, opacity: 1, duration: 1.3, stagger: 0.06, delay: 0.2 + i * 0.1, ease: 'power4.out', clearProps: 'transform,opacity' }));
+      },
+    });
+  },
+
+  // 2:1 — the bar fills in two strokes (two parts, then one) as it enters.
+  adentro(section) {
+    splitAll(section); batchReveal(section); clipReveal(section);
+    counters(section);
+    const q = gsap.utils.selector(section);
+    gsap.timeline({ scrollTrigger: { trigger: q('.ratio')[0], start: 'top 85%', end: 'top 25%', scrub: 1.2 } })
+      .fromTo(q('.ratio-seg--malto'), { scaleX: 0 }, { scaleX: 1, duration: 2, ease: 'none' }, 0)
+      .fromTo(q('.ratio-seg--fructo'), { scaleX: 0 }, { scaleX: 1, duration: 1, ease: 'none' }, 2)
+      .fromTo(q('.ratio-scale i'), { scaleX: 0, transformOrigin: 'left' }, { scaleX: 1, duration: 1, stagger: 1, ease: 'none' }, 0)
+      .from(q('.ratio-seg b, .ratio-seg span'), { opacity: 0, y: 8, duration: 0.6, stagger: 0.15 }, 1.6);
+  },
+
+  // Sports chips pop in; three timelines fill as the visitor scrolls and the gel appears at the pause.
+  cuando(section) {
+    splitAll(section); batchReveal(section);
+    const chips = section.querySelectorAll('[data-chip]');
+    const chipList = section.querySelector('.chips');
+    gsap.from(chips, { scale: 0.88, y: 12, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.05, onComplete: () => chipList.classList.add('is-ready'), scrollTrigger: { trigger: chipList, start: 'top 88%', once: true } });
+    section.querySelectorAll('[data-tl]').forEach((row) => {
+      const dots = row.querySelectorAll('.tl-dot');
+      const tl = gsap.timeline({ scrollTrigger: { trigger: row, start: 'top 85%', end: 'top 35%', scrub: 1 } });
+      tl.fromTo(row.querySelector('.tl-bar i'), { scaleX: 0 }, { scaleX: 1, duration: 1, ease: 'none' }, 0);
+      dots.forEach((d, i) => {
+        tl.from(d.querySelector('i'), { scale: 0, duration: 0.2, ease: 'power2.out' }, i * 0.5)
+          .from([d.querySelector('b'), d.querySelector('small')], { opacity: 0, y: 6, duration: 0.2, stagger: 0.04 }, i * 0.5 + 0.05);
+      });
+      ScrollTrigger.create({ trigger: row, start: 'top 40%', once: true, onEnter: () => row.classList.add('is-on') });
+      const gel = row.querySelector('.tl-dot--gel i');
+      if (gel) tl.fromTo(gel, { boxShadow: '0 0 0 0 rgba(197,230,60,.9)' }, { boxShadow: '0 0 0 14px rgba(197,230,60,0)', duration: 0.3, ease: 'power2.out' }, 0.55);
+    });
+  },
+
+  // The stick turns over as the three steps go by; the current step stays at full ink.
+  como(section, { isMobile }) {
+    splitAll(section);
+    const flip = section.querySelector('.flip');
+    const steps = [...section.querySelectorAll('[data-step]')];
+    const list = section.querySelector('.steps');
+    const arrow = section.querySelector('.flip-arrow');
+    gsap.from(steps, { y: 26, opacity: 0, duration: 0.8, stagger: 0.1, scrollTrigger: { trigger: list, start: 'top 85%', once: true } });
+    gsap.to(section.querySelector('.como-visual'), { y: -10, duration: 3, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    const st = isMobile
+      ? { trigger: section.querySelector('.como-visual'), start: 'top 85%', end: 'top 25%', scrub: 1 }
+      : { trigger: list, start: 'top 60%', end: 'bottom 45%', scrub: 1 };
+    gsap.fromTo(flip, { rotationY: 0 }, { rotationY: 180, ease: 'none', scrollTrigger: { ...st, scrub: 1.2, onUpdate: (self) => { if (arrow) arrow.textContent = self.progress > 0.5 ? '←' : '→'; } } });
+    if (isMobile) return;
+    steps.forEach((step) => ScrollTrigger.create({
+      trigger: step, start: 'top 58%', end: 'bottom 42%',
+      onToggle: (self) => { step.classList.toggle('is-active', self.isActive); list.classList.toggle('has-active', steps.some((s) => s.classList.contains('is-active'))); },
+    }));
   },
 
   reveal(section) { splitAll(section); batchReveal(section); clipReveal(section); },
-  split(section) { splitAll(section); clipReveal(section); },
+  split(section) { splitAll(section); clipReveal(section); counters(section); },
+
   donde(section, { isMobile }) {
     splitAll(section); batchReveal(section); clipReveal(section);
-    if (!isMobile) gsap.fromTo(section.querySelector(':scope > .stripe'), { xPercent: 10 }, { xPercent: -4, ease: 'none', scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: true } });
+    // The rules of the list draw from the left, one after the other.
+    const places = section.querySelectorAll('.places li');
+    gsap.fromTo(places, { '--ls': 0 }, { '--ls': 1, duration: 0.9, ease: 'power3.inOut', stagger: 0.12, scrollTrigger: { trigger: section.querySelector('.places'), start: 'top 85%', toggleActions: 'play none none reverse' } });
+    const banner = section.querySelector('.banner');
+    gsap.fromTo(banner.querySelector('.stripe'), { xPercent: 18 }, { xPercent: -6, ease: 'none', scrollTrigger: { trigger: banner, start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
+    if (!isMobile) gsap.fromTo(section.querySelector(':scope > .stripe'), { xPercent: 10 }, { xPercent: -4, ease: 'none', scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
+  },
+
+  faq(section) {
+    splitAll(section); batchReveal(section);
+    section.querySelectorAll('.faq-item').forEach((item) => {
+      const body = item.querySelector('.faq-body');
+      item.querySelector('summary').addEventListener('click', (e) => {
+        e.preventDefault();
+        if (item.open) {
+          gsap.to(body, { height: 0, opacity: 0, duration: 0.3, ease: 'power2.in', onComplete: () => { item.open = false; gsap.set(body, { clearProps: 'height,opacity' }); } });
+        } else {
+          item.open = true;
+          gsap.from(body, { height: 0, opacity: 0, duration: 0.45, ease: 'power3.out', clearProps: 'height,opacity', onComplete: () => ScrollTrigger.refresh() });
+        }
+      });
+    });
+  },
+
+  cierre(section) {
+    splitAll(section); batchReveal(section);
+    const star = section.querySelector('.destello');
+    gsap.fromTo(star, { rotation: -120, scale: 0.4 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: section, start: 'top 90%', end: 'top 25%', scrub: 1 } });
   },
 };
 
@@ -328,6 +515,15 @@ const SECTIONS = {
 function topbar() {
   const bar = document.querySelector('.topbar');
   ScrollTrigger.create({ start: 40, end: 'max', onToggle: (self) => bar.classList.toggle('is-scrolled', self.isActive) });
+  const fill = bar.querySelector('.progress i');
+  if (fill) gsap.to(fill, { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0.3 } });
+  // Active nav link
+  const links = [...bar.querySelectorAll('.topnav a[href^="#"]')];
+  links.forEach((a) => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (!target) return;
+    ScrollTrigger.create({ trigger: target, start: 'top 50%', end: 'bottom 50%', onToggle: (self) => a.classList.toggle('is-active', self.isActive) });
+  });
 }
 function themeFlips() {
   document.querySelectorAll('[data-theme-section]').forEach((s) => {

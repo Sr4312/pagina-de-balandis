@@ -1,25 +1,27 @@
-"""Cut the generated sachets out of their white background and normalise them to the 300:592 frame the CSS expects.
+"""Cut the generated sticks out of their white background and normalise them to the 300:1080 frame the CSS expects.
 
-Usage: python tools/cutout.py
-Reads assets/img/gen-sachet-*.png, writes assets/img/sachet-*.webp (alpha) and assets/img/og-trio.jpg.
+Usage: python tools/cutout.py [rojos lima neutro]
+Reads assets/ref/gen-stick-<key>.png, writes assets/img/stick-<key>.webp (alpha).
 """
+import sys
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parent.parent
 IMG = ROOT / "assets" / "img"
-RATIO = 300 / 592
+RATIO = 300 / 1080
 TARGET_H = 1400
 KEY = (0, 255, 0)
+# Flood threshold per flavour: Neutro's printed colour (#ECE8DF) is close to white, so it gets a tighter key.
+THRESH = {"rojos": 26, "lima": 26, "neutro": 14}
 
 
-def cutout(src: Path, dst: Path) -> None:
+def cutout(src: Path, dst: Path, thresh: int) -> None:
     im = Image.open(src).convert("RGB")
     w, h = im.size
     work = im.copy()
     for corner in ((0, 0), (w - 1, 0), (0, h - 1), (w - 1, h - 1)):
-        ImageDraw.floodfill(work, corner, KEY, thresh=24)  # Neutral's base (#DEE4E8) is 33 away from white, still safe
-    # alpha: 255 where not keyed
+        ImageDraw.floodfill(work, corner, KEY, thresh=thresh)
     mask = Image.new("L", (w, h), 255)
     px = work.load(); mp = mask.load()
     for y in range(h):
@@ -31,9 +33,9 @@ def cutout(src: Path, dst: Path) -> None:
     out.putalpha(mask)
     bbox = mask.getbbox()
     out = out.crop(bbox)
-    # pad to 300:592 (centred), small margin so the shadow in CSS has room
+    # pad to 300:1080 (centred), small margin so the shadow in CSS has room
     cw, ch = out.size
-    pad = int(ch * 0.02)
+    pad = int(ch * 0.015)
     fw, fh = cw + 2 * pad, ch + 2 * pad
     if fw / fh < RATIO:
         fw = int(fh * RATIO)
@@ -47,10 +49,6 @@ def cutout(src: Path, dst: Path) -> None:
     print(dst.name, canvas.size, f"{dst.stat().st_size // 1024} KB")
 
 
-for key in ("neutral", "citrus", "peach"):
-    cutout(ROOT / "assets" / "ref" / f"gen-sachet-{key}.png", IMG / f"sachet-{key}.webp")
-
-trio = Image.open(ROOT / "assets" / "ref" / "gen-trio.jpg").convert("RGB")
-trio.thumbnail((1600, 1600), Image.LANCZOS)
-trio.save(IMG / "og-trio.jpg", "JPEG", quality=84, optimize=True, progressive=True)
-print("og-trio.jpg", trio.size, f"{(IMG / 'og-trio.jpg').stat().st_size // 1024} KB")
+keys = sys.argv[1:] or ["rojos", "lima", "neutro"]
+for key in keys:
+    cutout(ROOT / "assets" / "ref" / f"gen-stick-{key}.png", IMG / f"stick-{key}.webp", THRESH.get(key, 24))
